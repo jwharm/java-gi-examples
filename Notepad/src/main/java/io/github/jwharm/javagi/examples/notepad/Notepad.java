@@ -54,8 +54,8 @@ public class Notepad extends Application {
         
         // Create the editor widget and set the font style to monospace
         textView = new TextView();
-        textView.getStyleContext().addClass("monospace");
-        
+        textView.setMonospace(true);
+
         // The text editor should be scrollable
         var scrolledWindow = new ScrolledWindow();
         scrolledWindow.setChild(textView);
@@ -109,6 +109,7 @@ public class Notepad extends Application {
     
     // New unnamed file
     public void clear() {
+        file = null;
     	title = "Unnamed";
     	textView.getBuffer().setText("", 0);
     	textView.getBuffer().setModified(false);
@@ -119,65 +120,56 @@ public class Notepad extends Application {
     
     // Open a file (using FileChooserNative)
     public void open() {
-        var dialog = new FileChooserNative(
-                "Open file",
-                window,
-                FileChooserAction.OPEN,
-                "Open",
-                "Cancel"
-        );
-        dialog.onResponse(response -> {
 
-        if (! ResponseType.of(response).equals(ResponseType.ACCEPT)) {
-            return;
-        }
+        var dialog = new FileDialog();
+        dialog.open(window, null, (obj, res, d) -> {
+            try {
+                file = dialog.openFinish(res);
+                if (file == null) {
+                    return;
+                }
 
-        // Get selected file from dialog
-        file = dialog.getFile();
-        if (file == null) {
-            return;
-        }
-
-        // Read file and put contents in the textview's text buffer. The read is done asynchronously.
-        file.loadContentsAsync(null, (object, result, data) -> {
-
-        try {
-            // The 'contents' and 'length' parameters are out-parameters. Because Java always does
-            // pass-by-value, we need to wrap these into Out<> objects.
-            Out<byte[]> contents = new Out<>();
-            if (file.loadContentsFinish(result, contents, null)) {
-                title = file.getBasename();
-                updateWindowTitle();
-                textView.getBuffer().setText(new String(contents.get()), contents.get().length);
-                textView.grabFocus();
+                // Read file and put contents in the textview's text buffer. The read is done asynchronously.
+                file.loadContentsAsync(null, (object, result, data) -> {
+                    try {
+                        // The 'contents' and 'length' parameters are out-parameters. Because Java always does
+                        // pass-by-value, we need to wrap these into Out<> objects.
+                        Out<byte[]> contents = new Out<>();
+                        if (file.loadContentsFinish(result, contents, null)) {
+                            title = file.getBasename();
+                            updateWindowTitle();
+                            textView.getBuffer().setText(new String(contents.get()), contents.get().length);
+                            textView.grabFocus();
+                        }
+                    } catch (GErrorException e) {
+                        System.err.println("Error: " + e.getMessage());
+                    }
+                });
+            } catch (GErrorException ignored) {
             }
-        } catch (GErrorException ex) {
-            ex.printStackTrace();
-        }
-
         });
-        });
-        dialog.show();
     }
     
     // Save a file. If the filename isn't known yet, show a 'Save file' dialog.
     public void save() {
     	if (file == null) {
-    		var dialog = new FileChooserNative("Save file", window, FileChooserAction.SAVE, "Save", "Cancel");
-    		dialog.onResponse(response -> {
-    			if (ResponseType.of(response).equals(ResponseType.ACCEPT)) {
-    	    		// Reset the 'modified' indicator and update the window title
-    				file = dialog.getFile();
-                    assert file != null;
+            var dialog = new FileDialog();
+            dialog.save(window, null, (obj, res, d) -> {
+                try {
+                    file = dialog.saveFinish(res);
+                    if (file == null) {
+                        return;
+                    }
+
                     title = file.getBasename();
-    		    	textView.getBuffer().setModified(false);
-    		    	modified = false;
-    				updateWindowTitle();
-    		    	textView.grabFocus();
-    				write();
-    			}
-    		});
-        	dialog.show();
+                    textView.getBuffer().setModified(false);
+                    modified = false;
+                    updateWindowTitle();
+                    textView.grabFocus();
+                    write();
+                } catch (GErrorException ignored) {
+                }
+            });
     	} else {
     		// Reset the 'modified' indicator and update the window title
 	    	textView.getBuffer().setModified(false);
@@ -198,7 +190,7 @@ public class Notepad extends Application {
     		// This would better be executed asynchronously with File.replaceContentsAsync().
 			file.replaceContents(contents, "", false, FileCreateFlags.NONE, null, null);
 		} catch (GErrorException e) {
-			e.printStackTrace();
-		}
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 }
