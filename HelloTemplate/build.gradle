@@ -13,6 +13,15 @@ dependencies {
     implementation "io.github.jwharm.javagi:adwaita:1.3-0.6-SNAPSHOT"
 }
 
+task compileResources {
+    doLast {
+        exec {
+            workingDir 'src/main/resources'
+            commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
+        }
+    }
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(20)
@@ -20,6 +29,7 @@ java {
 }
 
 tasks.withType(JavaCompile) {
+    dependsOn compileResources
     options.compilerArgs += "--enable-preview"
 }
 
