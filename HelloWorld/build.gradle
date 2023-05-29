@@ -3,13 +3,13 @@ apply plugin: 'application'
 
 repositories {
     mavenCentral()
-    maven { url "https://jitpack.io" }
+    mavenLocal()
 }
 
 dependencies {
     compileOnly "org.jetbrains:annotations:24.+"
-    implementation "com.github.jwharm.java-gi:glib:v0.5.1"
-    implementation "com.github.jwharm.java-gi:gtk:v0.5.1"
+    implementation "io.github.jwharm.javagi:glib:2.76-0.6-SNAPSHOT"
+    implementation "io.github.jwharm.javagi:gtk:4.10-0.6-SNAPSHOT"
 }
 
 java {
