@@ -93,13 +93,13 @@ public class HelloApplication extends Application {
     private void onAboutAction(SimpleAction action, Variant parameter) {
         String[] developers = { "John Doe", "Jane Doe" };
         var about = AboutWindow.builder()
-            .setTransientFor(this.getActiveWindow())
-            .setApplicationName("HelloTemplate")
-            .setApplicationIcon("io.github.jwharm.javagi.examples.HelloTemplate")
-            .setDeveloperName("James Random Hacker")
-            .setDevelopers(developers)
-            .setVersion("0.1.0")
-            .setCopyright("© 2023 Yoyodyne, Inc")
+            .transientFor(this.getActiveWindow())
+            .applicationName("HelloTemplate")
+            .applicationIcon("io.github.jwharm.javagi.examples.HelloTemplate")
+            .developerName("James Random Hacker")
+            .developers(developers)
+            .version("0.1.0")
+            .copyright("© 2023 Yoyodyne, Inc")
             .build();
         about.present();
     }

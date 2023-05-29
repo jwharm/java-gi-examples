@@ -285,12 +285,12 @@ public class PegSolitaire {
         StyleContext.addProviderForDisplay(Display.getDefault(), provider, 800);
 
         var grid = Grid.builder()
-                .setHalign(Align.CENTER)
-                .setValign(Align.CENTER)
-                .setRowSpacing(6)
-                .setColumnSpacing(6)
-                .setRowHomogeneous(true)
-                .setColumnHomogeneous(true)
+                .halign(Align.CENTER)
+                .valign(Align.CENTER)
+                .rowSpacing(6)
+                .columnSpacing(6)
+                .rowHomogeneous(true)
+                .columnHomogeneous(true)
                 .build();
         window.setChild(grid);
 
@@ -340,19 +340,19 @@ public class PegSolitaire {
     }
 
     public PegSolitaire(Application application) {
-        var window = new ApplicationWindow(application);
+        var header = new HeaderBar();
+        var window = ApplicationWindow.builder()
+                .application(application)
+                .title("Peg Solitaire")
+                .titlebar(header)
+                .defaultWidth(400).defaultHeight(400)
+                .build();
 
         var restart = Button.newFromIconName("view-refresh-symbolic");
         restart.onClicked(() -> createBoard(window));
-
-        var header = new HeaderBar();
         header.packStart(restart);
-        window.setTitle("Peg Solitaire");
-        window.setTitlebar(header);
-        window.setDefaultSize(400, 400);
 
         createBoard(window);
-
         window.setVisible(true);
     }
 

@@ -68,22 +68,22 @@ public class Notepad extends Application {
         // and the 'clicked' signal is connected to a method in this class.
         
         Button newButton = Button.builder()
-                .setLabel("New...")
-                .setIconName("document-new-symbolic")
+                .label("New...")
+                .iconName("document-new-symbolic")
                 .build();
         newButton.onClicked(this::clear);
         headerBar.packStart(newButton);
         
         Button openButton = Button.builder()
-                .setLabel("Open...")
-                .setIconName("document-open-symbolic")
+                .label("Open...")
+                .iconName("document-open-symbolic")
                 .build();
         openButton.onClicked(this::open);
         headerBar.packStart(openButton);
         
         Button saveButton = Button.builder()
-                .setLabel("Save")
-                .setIconName("document-save-symbolic")
+                .label("Save")
+                .iconName("document-save-symbolic")
                 .build();
         saveButton.onClicked(this::save);
         headerBar.packEnd(saveButton);
