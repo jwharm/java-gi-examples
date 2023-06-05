@@ -18,7 +18,7 @@ public class Main {
         var resource = Resource.load("src/main/resources/helloworld.gresource");
         resource.resourcesRegister();
 
-        var app = HelloApplication.newInstance();
+        var app = HelloApplication.create();
         app.run(args);
     }
 }

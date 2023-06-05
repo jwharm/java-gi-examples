@@ -5,7 +5,6 @@ import io.github.jwharm.javagi.annotations.RegisteredType;
 import io.github.jwharm.javagi.gtk.types.Types;
 import org.gnome.adw.AboutWindow;
 import org.gnome.adw.Application;
-import org.gnome.gio.ActionEntry;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gio.SimpleAction;
 import org.gnome.glib.Type;
@@ -49,7 +48,7 @@ public class HelloApplication extends Application {
      * {@code super(type)} call.
      * @return a new HelloApplication instance
      */
-    public static HelloApplication newInstance() {
+    public static HelloApplication create() {
         HelloApplication app = GObject.newInstance(gtype);
         app.setApplicationId("io.github.jwharm.javagi.examples.HelloTemplate");
         app.setFlags(ApplicationFlags.DEFAULT_FLAGS);
@@ -63,14 +62,21 @@ public class HelloApplication extends Application {
      */
     @InstanceInit
     public void construct() {
-        // Each ActionEntry is a struct. We only need to fill the name and action fields, and leave the other fields empty (null).
-        ActionEntry[] entries = {
-            ActionEntry.allocate("about", this::onAboutAction, null, null, null),
-            ActionEntry.allocate("preferences", this::onPreferencesAction, null, null, null),
-            ActionEntry.allocate("greet", this::onGreetAction, null, null, null),
-            ActionEntry.allocate("quit", (action, variant) -> this.quit(), null, null, null)
-        };
-        this.addActionEntries(entries, null);
+        var about = new SimpleAction("about", null);
+        about.onActivate(this::onAboutAction);
+        addAction(about);
+
+        var preferences = new SimpleAction("preferences", null);
+        preferences.onActivate(this::onPreferencesAction);
+        addAction(preferences);
+
+        var greet = new SimpleAction("greet", null);
+        greet.onActivate(this::onGreetAction);
+        addAction(greet);
+
+        var quit = new SimpleAction("quit", null);
+        quit.onActivate($ -> quit());
+        addAction(quit);
         this.setAccelsForAction("app.quit", new String[]{"<primary>q"});
     }
 
@@ -83,14 +89,14 @@ public class HelloApplication extends Application {
     public void activate() {
         var win = this.getActiveWindow();
         if (win == null) {
-            win = HelloWindow.newInstance(this);
+            win = HelloWindow.create(this);
         }
         win.present();
     }
 
     // The following methods are executed by the ActionEntries defined above.
 
-    private void onAboutAction(SimpleAction action, Variant parameter) {
+    private void onAboutAction(Variant parameter) {
         String[] developers = { "John Doe", "Jane Doe" };
         var about = AboutWindow.builder()
             .transientFor(this.getActiveWindow())
@@ -104,11 +110,11 @@ public class HelloApplication extends Application {
         about.present();
     }
 
-    private void onPreferencesAction(SimpleAction action, Variant parameter) {
+    private void onPreferencesAction(Variant parameter) {
         System.out.println("app.preferences action activated");
     }
 
-    private void onGreetAction(SimpleAction action, Variant parameter) {
+    private void onGreetAction(Variant parameter) {
         var win = (HelloWindow) this.getActiveWindow();
         if (win != null) {
             win.label.setLabel("Hello again!");

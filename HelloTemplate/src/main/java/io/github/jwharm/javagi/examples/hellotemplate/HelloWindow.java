@@ -43,7 +43,7 @@ public class HelloWindow extends ApplicationWindow {
      * @param app the HelloApplication instance
      * @return the new HelloWindow instance
      */
-    public static HelloWindow newInstance(Application app) {
+    public static HelloWindow create(Application app) {
         HelloWindow win = GObject.newInstance(gtype);
         win.setApplication(app);
         return win;

@@ -34,14 +34,7 @@ public class PegSolitaire {
         public int x;
         public int y;
 
-        private static Type type;
-
-        public static Type getType() {
-            if (type == null) {
-                type = Types.register(SolitairePeg.class);
-            }
-            return type;
-        }
+        public static Type gtype = Types.register(SolitairePeg.class);
 
         public SolitairePeg(MemorySegment address) {
             super(address);
@@ -89,8 +82,8 @@ public class PegSolitaire {
         }
 
         // And finally, we add a simple constructor.
-        public static SolitairePeg newInstance() {
-            return (SolitairePeg) GObject.newInstance(getType());
+        public static SolitairePeg create() {
+            return GObject.newInstance(SolitairePeg.gtype);
         }
     }
 
@@ -164,7 +157,7 @@ public class PegSolitaire {
         if (! (paintable instanceof SolitairePeg))
             return null;
 
-        return ContentProvider.newTyped(SolitairePeg.getType(), paintable);
+        return ContentProvider.newTyped(SolitairePeg.gtype, paintable);
     }
 
     /* This notifies us that the drag has begun.
@@ -219,7 +212,7 @@ public class PegSolitaire {
      */
     boolean dropAccept(Drop drop, Image image) {
         // First, check the drop is actually trying to drop a peg
-        if (! drop.getFormats().containGtype(SolitairePeg.getType()))
+        if (! drop.getFormats().containGtype(SolitairePeg.gtype))
             return false;
 
         // If the image already contains a peg, we cannot accept another one
@@ -303,7 +296,7 @@ public class PegSolitaire {
                 image.addCssClass("solitaire-field");
                 image.setIconSize(IconSize.LARGE);
                 if (x != 3 || y != 3) {
-                    var peg = SolitairePeg.newInstance();
+                    var peg = SolitairePeg.create();
                     peg.setPosition(x, y);
                     image.setFromPaintable(peg);
                 }
@@ -329,7 +322,7 @@ public class PegSolitaire {
 
                 // First we specify the data we accept: pegs.
                 // And we only want moves.
-                var target = new DropTarget(SolitairePeg.getType(), DragAction.MOVE);
+                var target = new DropTarget(SolitairePeg.gtype, DragAction.MOVE);
                 // Then we connect our signals.
                 target.onAccept(drop -> dropAccept(drop, image));
                 target.onDrop((value, x_, y_) -> dropDrop(value, image));
