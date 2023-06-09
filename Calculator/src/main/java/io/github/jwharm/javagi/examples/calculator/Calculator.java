@@ -9,6 +9,9 @@ import org.gnome.gdk.ModifierType;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gtk.*;
 
+/**
+ * A small example calculator app
+ */
 public class Calculator extends Application {
 
     // Definition of a calculator operation on two inputs
@@ -21,14 +24,10 @@ public class Calculator extends Application {
     private float accumulator = 0;
     private boolean clean = false;
 
-    public static void main(String[] args) throws Exception {
-        {
-            var app = new Calculator("io.github.jwharm.samples.Calculator", ApplicationFlags.NON_UNIQUE);
-            app.onActivate(app::activate);
-            app.run(args);
-        }
-        System.gc();
-        Thread.sleep(1000);
+    public static void main(String[] args) {
+        var app = new Calculator("io.github.jwharm.samples.Calculator", ApplicationFlags.NON_UNIQUE);
+        app.onActivate(app::activate);
+        app.run(args);
     }
     
     public Calculator(String applicationId, ApplicationFlags flags) {
@@ -64,8 +63,8 @@ public class Calculator extends Application {
                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
     }
-    
-    // Setup the headerbar, display entry, and buttons
+
+    // Setup the header bar, display entry, and buttons
     private void setupWidgets(ApplicationWindow window) {
         var grid = new Grid();
         grid.setColumnSpacing(1);
@@ -84,8 +83,8 @@ public class Calculator extends Application {
         display.setAlignment(1f);
         display.setPlaceholderText("0");
         display.setEditable(false);
-        display.getStyleContext().addClass("monospace");
-        
+        display.addCssClass("monospace");
+
         grid.attach(display, 0, 1, 4, 1);
         
         // The input buttons are created in a helper function (defined further below)
@@ -117,7 +116,7 @@ public class Calculator extends Application {
     
     // Small helper function to create keypad buttons and attach a signal
     private Button createInputButton(char label) {
-        var button = Button.newWithLabel("" + label);
+        var button = Button.newWithLabel(String.valueOf(label));
         button.setVexpand(true);
         button.onClicked(() -> input(label));
         return button;
@@ -125,7 +124,7 @@ public class Calculator extends Application {
     
     // Small helper function to create function buttons and attach a signal
     private Button createFunctionButton(char label) {
-        var button = Button.newWithLabel("" + label);
+        var button = Button.newWithLabel(String.valueOf(label));
         button.onClicked(() -> setFunction(label));
         return button;
     }
@@ -153,7 +152,7 @@ public class Calculator extends Application {
     private void backspace() {
         int length = display.getText().length();
         if (length > 0) {
-            setDisplayValue(display.getText().substring(0, length - 1));
+            display.setText(display.getText().substring(0, length - 1));
         }
     }
     
@@ -168,10 +167,10 @@ public class Calculator extends Application {
         }
         if (input == '.') {
             if (! display.getText().contains(".")) {
-                setDisplayValue(display.getText() + input);
+                display.setText(display.getText() + input);
             }
         } else if (Character.isDigit(input)) {
-            setDisplayValue(display.getText() + input);
+            display.setText(display.getText() + input);
         }
     }
     
@@ -196,7 +195,7 @@ public class Calculator extends Application {
             // Run the calculation function
             float out = function.apply(accumulator, in);
             // Remove ".0" and display the result
-            setDisplayValue(Float.toString(out).replaceAll("\\.0$", ""));
+            display.setText(Float.toString(out).replaceAll("\\.0$", ""));
         }
         clean = true;
     }
@@ -213,10 +212,5 @@ public class Calculator extends Application {
     private float getDisplayValue() {
         String text = display.getText();
         return (text.equals("")) ? 0 : Float.parseFloat(text);
-    }
-    
-    // Set the displayed value to the given string.
-    private void setDisplayValue(String number) {
-        display.setText(number);
     }
 }
