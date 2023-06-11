@@ -65,7 +65,7 @@ public class WebViewExample {
 
             // Create webview
             WebView webview = WebView.builder()
-                    .heightRequest(500)
+                    .heightRequest(300)
                     .widthRequest(500)
                     .build();
 
