@@ -6,6 +6,6 @@ This repository contains small example applications made with [Java-GI](https://
 | ---- | ---- | ---- | ---- |
 | [Hello World](https://github.com/jwharm/java-gi-examples/tree/main/HelloWorld) | [Peg Solitaire](https://github.com/jwharm/java-gi-examples/tree/main/PegSolitaire) | [Calculator](https://github.com/jwharm/java-gi-examples/tree/main/Calculator) | [Notepad](https://github.com/jwharm/java-gi-examples/tree/main/Notepad) |
 
-| ![ListViewer screenshot](https://github.com/jwharm/java-gi/blob/main/images/listviewer.png) | 🎵 | ![Code Editor screenshot](https://github.com/jwharm/java-gi/blob/main/images/codeeditor.png) | ![WebView screenshot](https://github.com/jwharm/java-gi/blob/main/images/codeeditor.png)
+| ![ListViewer screenshot](https://github.com/jwharm/java-gi/blob/main/images/listviewer.png) | 🎵 | ![Code Editor screenshot](https://github.com/jwharm/java-gi/blob/main/images/codeeditor.png) | ![WebView screenshot](https://github.com/jwharm/java-gi/blob/main/images/webview.png)
 | ---- | ---- | ---- | ---- |
 | [List viewer](https://github.com/jwharm/java-gi-examples/tree/main/ListViewer) | [Play Sound](https://github.com/jwharm/java-gi-examples/tree/main/PlaySound) | [Code Editor](https://github.com/jwharm/java-gi-examples/tree/main/CodeEditor) | [Web View demo](https://github.com/jwharm/java-gi-examples/tree/main/WebView)
