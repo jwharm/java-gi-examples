@@ -1,12 +1,9 @@
 package io.github.jwharm.javagi.examples.webview;
 
 import io.github.jwharm.javagi.base.UnsupportedPlatformException;
-import org.gnome.glib.Type;
-import org.gnome.gobject.GObjects;
 import org.gnome.gtk.*;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.webkit.*;
-import org.gnome.webkit.jsc.Context;
 import org.gnome.webkit.jsc.Value;
 
 /**
@@ -41,7 +38,7 @@ public class WebViewExample {
             <h1>WebKit demo</h1>
             Welcome to this webpage.
             <p>
-            If you click the following button, a 
+            If you click the following button, a
             <a href="https://docs.gtk.org/gtk4/class.AlertDialog.html">GtkAlertDialog</a>
             will open:<br>
             <input id="inputId" type="button" value="Open dialog" />
