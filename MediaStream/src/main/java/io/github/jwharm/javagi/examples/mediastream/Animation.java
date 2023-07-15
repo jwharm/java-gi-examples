@@ -256,7 +256,7 @@ public class Animation {
 
             // Don't forget to chain up to the parent class' implementation
             // of the finalize function.
-            // super.finalize_();
+            parent().finalize_();
         }
 
         /**
