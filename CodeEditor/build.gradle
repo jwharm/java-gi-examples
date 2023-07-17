@@ -8,10 +8,10 @@ repositories {
 
 dependencies {
     compileOnly "org.jetbrains:annotations:24.+"
-    implementation "com.github.jwharm.java-gi:glib:0.6.0"
-    implementation "com.github.jwharm.java-gi:gtk:0.6.0"
-    implementation "com.github.jwharm.java-gi:adwaita:0.6.0"
-    implementation "com.github.jwharm.java-gi:gtksourceview:0.6.0"
+    implementation "com.github.jwharm.java-gi:glib:latest.release"
+    implementation "com.github.jwharm.java-gi:gtk:latest.release"
+    implementation "com.github.jwharm.java-gi:adwaita:latest.release"
+    implementation "com.github.jwharm.java-gi:gtksourceview:latest.release"
 }
 
 java {
