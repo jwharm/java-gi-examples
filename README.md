@@ -6,13 +6,9 @@ This repository contains small example applications made with [Java-GI](https://
 
 A typical ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloWorld) that displays a Gtk window with a button. When you click the button, the application quits.
 
-![Hello World screenshot](images/simple-helloworld.png)
-
 ### Hello World - template based
 
 This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files.
-
-![Hello World (template based) screenshot](images/template-helloworld.png)
 
 ### GStreamer sound player example
 
@@ -22,34 +18,26 @@ This example [demonstrates how to use GStreamer](https://github.com/jwharm/java-
 
 A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/Calculator) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
 
-![Calculator screenshot](images/calculator.png)
-
 ### List integration example
 
 This example [demonstrates](https://github.com/jwharm/java-gi-examples/tree/main/ListViewer) how you can use a Java ArrayList to implement the GListModel interface, which is central to all modern Gtk list widgets.
-
-| ![ListViewer screenshot](images/listviewer.png)
 
 ### Notepad example
 
 A very basic Adwaita [plain-text editor](https://github.com/jwharm/java-gi-examples/tree/main/Notepad), that can load and save files using GIO.
 
-![Notepad screenshot](images/notepad.png)
-
 ### Code editor example
 
 A [source code editor](https://github.com/jwharm/java-gi-examples/tree/main/CodeEditor). It is mostly the same application as the Notepad example above, but this one uses GtkSourceview as the text widget and enables line numbers and syntax highlighting.
 
-![Code Editor screenshot](images/codeeditor.png)
+### Peg Solitaire example
+
+This [game](https://github.com/jwharm/java-gi-examples/tree/main/PegSolitaire) is a direct port of the Peg-Solitaire drag-and-drop example in the Gtk Demo.
 
 ### Web browser example
 
 This example creates a very basic [web browser](https://github.com/jwharm/java-gi-examples/tree/main/Browser) using WebkitGtk. It was inspired by the browser example in GNOME Workbench.
 
-![Web Browser screenshot](images/browser.png)
-
 ### Mediastream example
 
 The [Mediastream example](https://github.com/jwharm/java-gi-examples/tree/main/MediaStream) is ported from GtkDemo. It paints a simple image using Cairo, and then rotates the image in a GtkVideo widget. The Cairo draw commands use the [Cairo Java bindings](https://github.com/jwharm/cairo-java-bindings).
-
-![Media Stream screenshot](images/mediastream.png)

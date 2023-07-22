@@ -14,3 +14,5 @@ need to be compiled with `glib-resource-compiler` before they can be used. The
 Gradle build script is configured to run `glib-compile-resources` before the 
 Java code is compiled and run, so please make sure the Gtk development tools 
 are installed.
+
+![Hello World (template based) screenshot](template-helloworld.png)
