@@ -10,10 +10,6 @@ A typical ["Hello World" example](https://github.com/jwharm/java-gi-examples/tre
 
 This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files.
 
-### GStreamer sound player
-
-This example [demonstrates how to use GStreamer](https://github.com/jwharm/java-gi-examples/tree/main/PlaySound) and is ported from the GStreamer tutorials. It creates a GStreamer pipeline that will play sound from an Ogg Vorbis file.
-
 ### Calculator
 
 A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/Calculator) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
@@ -41,4 +37,13 @@ This example creates a very basic [web browser](https://github.com/jwharm/java-g
 ### Mediastream
 
 The [Mediastream example](https://github.com/jwharm/java-gi-examples/tree/main/MediaStream) is ported from GtkDemo. It paints a simple image using Cairo, and then rotates the image in a GtkVideo widget. The Cairo draw commands use the [Cairo Java bindings](https://github.com/jwharm/cairo-java-bindings).
+
+### GStreamer sound player
+
+This example [demonstrates how to use GStreamer](https://github.com/jwharm/java-gi-examples/tree/main/PlaySound) and is ported from the GStreamer tutorials. It creates a GStreamer pipeline that will play sound from an Ogg Vorbis file.
+
+## GStreamer screen recorder
+
+A command-line [screen recording](https://github.com/jwharm/java-gi-examples/tree/main/ScreenRecorder) that records the screen for 5 seconds into an Ogg/Theora file. It also demonstrates how to implement a Tee and an AppSink into the pipeline so you can trigger custom actions on the recorded data.
+
 

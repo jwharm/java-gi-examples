@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compileOnly "org.jetbrains:annotations:24.+"
+    implementation "com.github.jwharm.java-gi:glib:0.6.1"
+    implementation "com.github.jwharm.java-gi:gstreamer:0.6.1"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(20)
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += "--enable-preview"
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs += "--enable-preview"
+    jvmArgs += "--enable-native-access=ALL-UNNAMED"
+}
+
+jar {
+    archiveBaseName = "screenrec"
+    archiveVersion = "0.1.0"
+}
+
+mainClassName = "io.github.jwharm.javagi.examples.screenrec.ScreenRecorder"
