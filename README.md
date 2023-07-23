@@ -30,9 +30,13 @@ A [source code editor](https://github.com/jwharm/java-gi-examples/tree/main/Code
 
 This [game](https://github.com/jwharm/java-gi-examples/tree/main/PegSolitaire) is a direct port of the Peg-Solitaire drag-and-drop example in the Gtk Demo.
 
-### Web browser
+### WebkitGtk Web browser
 
 This example creates a very basic [web browser](https://github.com/jwharm/java-gi-examples/tree/main/Browser) using WebkitGtk. It was inspired by the browser example in GNOME Workbench.
+
+### WebkitGtk Javascript callback
+
+This example is a [small WebkitGtk application](https://github.com/jwharm/java-gi-examples/tree/main/Javascript) that runs a Java callback function from a Javascript function in the webpage.
 
 ### Mediastream
 
@@ -42,7 +46,7 @@ The [Mediastream example](https://github.com/jwharm/java-gi-examples/tree/main/M
 
 This example [demonstrates how to use GStreamer](https://github.com/jwharm/java-gi-examples/tree/main/PlaySound) and is ported from the GStreamer tutorials. It creates a GStreamer pipeline that will play sound from an Ogg Vorbis file.
 
-## GStreamer screen recorder
+### GStreamer screen recorder
 
 A command-line [screen recording](https://github.com/jwharm/java-gi-examples/tree/main/ScreenRecorder) that records the screen for 5 seconds into an Ogg/Theora file. It also demonstrates how to implement a Tee and an AppSink into the pipeline so you can trigger custom actions on the recorded data.
 
