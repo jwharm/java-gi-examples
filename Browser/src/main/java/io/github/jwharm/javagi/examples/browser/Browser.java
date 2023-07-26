@@ -1,6 +1,5 @@
 package io.github.jwharm.javagi.examples.browser;
 
-import io.github.jwharm.javagi.base.UnsupportedPlatformException;
 import org.gnome.adw.Application;
 import org.gnome.adw.ApplicationWindow;
 import org.gnome.adw.Bin;
