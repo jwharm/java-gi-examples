@@ -10,7 +10,6 @@ dependencies {
     compileOnly "org.jetbrains:annotations:24.+"
     implementation "com.github.jwharm.java-gi:glib:latest.release"
     implementation "com.github.jwharm.java-gi:gtk:latest.release"
-    implementation "com.github.jwharm.java-gi:adwaita:latest.release"
     implementation "com.github.jwharm.java-gi:gtksourceview:latest.release"
 }
 

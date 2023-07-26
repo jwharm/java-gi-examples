@@ -1,7 +1,7 @@
 package io.github.jwharm.javagi.examples.codeeditor;
 
 import io.github.jwharm.javagi.gtk.types.Types;
-import org.gnome.adw.Application;
+import org.gnome.gtk.Application;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;
