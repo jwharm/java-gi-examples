@@ -9,19 +9,17 @@ import org.gnome.gdk.ModifierType;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gtk.*;
 
+import java.util.function.DoubleBinaryOperator;
+
 /**
  * A small example calculator app
  */
 public class Calculator extends Application {
 
-    // Definition of a calculator operation on two inputs
-    private interface CalculatorFunction {
-        float apply(float a, float b);
-    }
-    
     private Entry display;
-    private CalculatorFunction function;
-    private float accumulator = 0;
+    private Button buttonResult;
+    private DoubleBinaryOperator function; // operator on two doubles
+    private double accumulator = 0;
     private boolean clean = false;
 
     public static void main(String[] args) {
@@ -34,7 +32,7 @@ public class Calculator extends Application {
         super(applicationId, flags);
     }
     
-    // Setup the window and add a keypress event controller
+    // Setup the window and add a key-press event controller
     public void activate() {
         loadCSS();
         var window = new ApplicationWindow(this);
@@ -43,7 +41,7 @@ public class Calculator extends Application {
 
         // Add event controller for key presses
         var controller = new EventControllerKey();
-        controller.onKeyPressed(this::keypressed);
+        controller.onKeyPressed(this::keyPressed);
         window.addController(controller);
         
         setupWidgets(window);
@@ -100,9 +98,9 @@ public class Calculator extends Application {
         grid.attach(createInputButton('0'), 0, 5, 1, 1);
         grid.attach(createInputButton('.'), 1, 5, 1, 1);
         
-        var buttonIs = createFunctionButton('=');
-        buttonIs.addCssClass("suggested-action");
-        grid.attach(buttonIs, 2, 5, 1, 1);
+        buttonResult = createFunctionButton('=');
+        buttonResult.addCssClass("suggested-action");
+        grid.attach(buttonResult, 2, 5, 1, 1);
         
         grid.attach(createFunctionButton('*'), 3, 2, 1, 1);
         grid.attach(createFunctionButton('/'), 3, 3, 1, 1);
@@ -111,7 +109,10 @@ public class Calculator extends Application {
         
         window.setContent(grid);
         window.present();
-        buttonIs.grabFocus();
+
+        // Make sure that the '=' button has the keyboard focus.
+        // Pressing <Enter> should always activate the '=' button.
+        buttonResult.grabFocus();
     }
     
     // Small helper function to create keypad buttons and attach a signal
@@ -130,7 +131,7 @@ public class Calculator extends Application {
     }
     
     // Handle key press events
-    public boolean keypressed(int keyval, int keycode, ModifierType state) {
+    public boolean keyPressed(int keyval, int keycode, ModifierType state) {
         String key = Gdk.keyvalName(keyval);
         if (key != null)
             switch (key) {
@@ -145,6 +146,7 @@ public class Calculator extends Application {
                 case "c" -> clear();
                 case "Escape" -> quit();
             }
+        buttonResult.grabFocus();
         return true;
     }
     
@@ -162,7 +164,7 @@ public class Calculator extends Application {
         // number into the accumulator.
         if (clean) {
             accumulator = getDisplayValue();
-            display.setText("");
+            display.setText(" ");
             clean = false;
         }
         if (input == '.') {
@@ -172,6 +174,7 @@ public class Calculator extends Application {
         } else if (Character.isDigit(input)) {
             display.setText(display.getText() + input);
         }
+        buttonResult.grabFocus();
     }
     
     // Trigger calculation and set the new function to be 
@@ -179,38 +182,39 @@ public class Calculator extends Application {
     private void setFunction(char input) {
        calculate();
        function = switch (input) {
-            case '*' -> (float a, float b) -> a * b;
-            case '/' -> (float a, float b) -> a / b;
-            case '+' -> (float a, float b) -> a + b;
-            case '-' -> (float a, float b) -> a - b;
+            case '*' -> (double a, double b) -> a * b;
+            case '/' -> (double a, double b) -> a / b;
+            case '+' -> (double a, double b) -> a + b;
+            case '-' -> (double a, double b) -> a - b;
             case '=' -> null;
             default -> function;
         };
+        buttonResult.grabFocus();
     }
     
     // Calculate the result and display it on screen
     private void calculate() {
-        float in = getDisplayValue();
+        double in = getDisplayValue();
         if (function != null) {
             // Run the calculation function
-            float out = function.apply(accumulator, in);
+            double out = function.applyAsDouble(accumulator, in);
             // Remove ".0" and display the result
-            display.setText(Float.toString(out).replaceAll("\\.0$", ""));
+            display.setText(Double.toString(out).replaceAll("\\.0$", ""));
         }
         clean = true;
     }
     
     // Clear the display and the action status
     private void clear() {
-        display.setText("");
+        display.setText(" ");
         accumulator = 0;
         clean = false;
         function = null;
     }
     
     // Get the currently displayed value, or 0 if it's empty
-    private float getDisplayValue() {
+    private double getDisplayValue() {
         String text = display.getText();
-        return (text.equals("")) ? 0 : Float.parseFloat(text);
+        return (text.isEmpty()) ? 0 : Double.parseDouble(text);
     }
 }
