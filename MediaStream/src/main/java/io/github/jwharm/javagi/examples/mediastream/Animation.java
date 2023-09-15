@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.mediastream;
 
-import io.github.jwharm.javagi.annotations.InstanceInit;
+import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.gtk.types.Types;
 import org.gnome.gdk.Paintable;
 import org.gnome.gdk.PaintableFlags;
@@ -256,7 +256,7 @@ public class Animation {
 
             // Don't forget to chain up to the parent class' implementation
             // of the finalize function.
-            parent().finalize_();
+            asParent().finalize_();
         }
 
         /**

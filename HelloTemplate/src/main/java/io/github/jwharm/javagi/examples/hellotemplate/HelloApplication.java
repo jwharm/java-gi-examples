@@ -1,7 +1,7 @@
 package io.github.jwharm.javagi.examples.hellotemplate;
 
-import io.github.jwharm.javagi.annotations.InstanceInit;
-import io.github.jwharm.javagi.annotations.RegisteredType;
+import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
+import io.github.jwharm.javagi.gobject.annotations.RegisteredType;
 import io.github.jwharm.javagi.gtk.types.Types;
 import org.gnome.adw.AboutWindow;
 import org.gnome.adw.Application;
@@ -21,7 +21,7 @@ import java.lang.foreign.MemorySegment;
  * as a virtual method, so the GType system will call it when the application
  * is activated.
  * <p>
- * The method {@link #construct()} is called during instance initialization of
+ * The method {@link #init()} is called during instance initialization of
  * the new GObject instance.
  */
 @RegisteredType(name="HelloApplication")
@@ -43,7 +43,7 @@ public class HelloApplication extends Application {
     /**
      * This is the constructor of the HelloApplication class.
      * It needs to be a static factory method, because the actual instance
-     * is created by {@link GObject#newInstance(Type)} and calls the {@link #construct()}
+     * is created by {@link GObject#newInstance(Type)} and calls the {@link #init()}
      * method before it returns, which would be impossible in a regular constructor with a
      * {@code super(type)} call.
      * @return a new HelloApplication instance
@@ -61,7 +61,7 @@ public class HelloApplication extends Application {
      * marks it as an instance init function.
      */
     @InstanceInit
-    public void construct() {
+    public void init() {
         var about = new SimpleAction("about", null);
         about.onActivate(this::onAboutAction);
         addAction(about);

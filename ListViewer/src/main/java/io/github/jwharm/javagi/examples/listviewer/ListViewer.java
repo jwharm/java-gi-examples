@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.listviewer;
 
-import io.github.jwharm.javagi.util.ListIndexModel;
+import io.github.jwharm.javagi.gio.ListIndexModel;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gtk.*;
 

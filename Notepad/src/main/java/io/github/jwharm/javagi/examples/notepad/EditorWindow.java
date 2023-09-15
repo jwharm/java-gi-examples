@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.notepad;
 
-import io.github.jwharm.javagi.annotations.InstanceInit;
+import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.base.GErrorException;
 import io.github.jwharm.javagi.base.Out;
 import io.github.jwharm.javagi.gtk.types.Types;

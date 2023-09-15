@@ -1,16 +1,14 @@
-apply plugin: 'java'
-apply plugin: 'application'
+plugins {
+    id 'application'
+}
 
 repositories {
     mavenCentral()
-    maven { url "https://jitpack.io" }
 }
 
 dependencies {
-    compileOnly "org.jetbrains:annotations:24.+"
-    implementation "com.github.jwharm.java-gi:glib:latest.release"
-    implementation "com.github.jwharm.java-gi:gtk:latest.release"
-    implementation "com.github.jwharm.java-gi:gtksourceview:latest.release"
+    implementation 'io.github.jwharm.javagi:adw:0.7'
+    implementation 'io.github.jwharm.javagi:gtksourceview:0.7'
 }
 
 java {
@@ -19,19 +17,17 @@ java {
     }
 }
 
-tasks.withType(JavaCompile) {
+tasks.named('compileJava') {
     options.compilerArgs += "--enable-preview"
 }
 
-tasks.withType(JavaExec) {
+tasks.named('run') {
     jvmArgs += "--enable-preview"
     jvmArgs += "--enable-native-access=ALL-UNNAMED"
     jvmArgs += "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
 }
 
-jar {
-    archiveBaseName = "codeeditor"
-    archiveVersion = "0.1.0"
+application {
+    mainClass = "io.github.jwharm.javagi.examples.codeeditor.CodeEditor"
 }
 
-mainClassName = "io.github.jwharm.javagi.examples.codeeditor.CodeEditor"

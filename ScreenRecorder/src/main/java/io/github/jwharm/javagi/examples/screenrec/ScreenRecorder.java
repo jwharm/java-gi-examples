@@ -1,7 +1,7 @@
 package io.github.jwharm.javagi.examples.screenrec;
 
 import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.util.JavaClosure;
+import io.github.jwharm.javagi.gobject.JavaClosure;
 import org.freedesktop.gstreamer.base.BaseSink;
 import org.freedesktop.gstreamer.gst.*;
 import org.gnome.glib.GError;
