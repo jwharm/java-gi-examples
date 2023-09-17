@@ -27,3 +27,9 @@ replay_pid*
 build/
 */.idea
 */gradle*
+
+# Compiled GResource files
+*/.gresource
+
+# Recording from the screen recorder example
+ScreenRecorder/recording.ogg
