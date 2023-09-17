@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:gtk:0.7'
-    implementation 'io.github.jwharm.cairobindings:cairo:1.16.1'
+    implementation 'io.github.jwharm.javagi:gtk:0.7.1'
+    implementation 'io.github.jwharm.cairobindings:cairo:1.16.2'
 }
 
 java {
