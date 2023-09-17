@@ -10,12 +10,10 @@ dependencies {
     implementation 'io.github.jwharm.javagi:adw:0.7'
 }
 
-task compileResources {
-    doLast {
-        exec {
-            workingDir 'src/main/resources'
-            commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
-        }
+tasks.register('compileResources') {
+    exec {
+        workingDir 'src/main/resources'
+        commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
     }
 }
 
