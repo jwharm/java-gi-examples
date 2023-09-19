@@ -1,0 +1,128 @@
+[
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gobject/0.7.1/gobject-0.7.1.jar",
+    "sha512": "a964da854a1fdd604a8f5c499b2ea3e6bf5f69bca97fa20aba693ca22e1d7f4200882a8c4d4c6246c8b8df96f57a3e4d187bde8438de60bd6085f7984a4cf398",
+    "dest": "lib",
+    "dest-filename": "gobject-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/pangocairo/0.7.1/pangocairo-0.7.1.jar",
+    "sha512": "b2bdf6a165dfaa84becffc1afac9590a35bfc230251316e6619b6208c1c9a603adb527754b1d2c62a9ad58baf0080f3890e5a649831b88e9119302898adda0a5",
+    "dest": "lib",
+    "dest-filename": "pangocairo-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/webkit/0.7.1/webkit-0.7.1.jar",
+    "sha512": "b544c763691b7cdeaef436135b1788e3a1ebe70b7f515f3bea7f5893c59bd37e71f8c53c07815bd3cf1a4fdbff5c0de89c75e09ad6c5d6de2cc2bb41ee543610",
+    "dest": "lib",
+    "dest-filename": "webkit-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gdkpixbuf/0.7.1/gdkpixbuf-0.7.1.jar",
+    "sha512": "6a93a1c18e120a0804018cc4d7661fb9a5cfb6c1cb1dcb1dd72b102431a9f77068b2f3812ab7291251d6097596f68040596d3171b83cd72799a3df4c91544390",
+    "dest": "lib",
+    "dest-filename": "gdkpixbuf-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/glib/0.7.1/glib-0.7.1.jar",
+    "sha512": "3cca576e5a0fde97ff39479bd188d2e20de16b98b9fdb48c56effd176d02f7db1709f513704ed8893b299154f82e09e6a75f5719b0827ff3eafbd317267c137a",
+    "dest": "lib",
+    "dest-filename": "glib-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gtk/0.7.1/gtk-0.7.1.jar",
+    "sha512": "8a54f71affc52dfd51d3ed2a6c5173720048c9fa5ede4fbcafa478eb039e31f05ca0760906de83d7306ae354a7cb1b960e012d913cec6ca708bba25889ce2346",
+    "dest": "lib",
+    "dest-filename": "gtk-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/cairobindings/cairo/1.16.2/cairo-1.16.2.jar",
+    "sha512": "b01b894f1c218188ab302a2c348164fa886bf702a2ede3c0229997e5e2552f8c6859eb7bdc258a26360b867592740bf2a58c1ff8370727873aefdc8d6030e461",
+    "dest": "lib",
+    "dest-filename": "cairo-1.16.2.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/pango/0.7.1/pango-0.7.1.jar",
+    "sha512": "27b6c2eba86879b0f5cc76891ae02b3e5f652ef0ac157f30d62c0662e7e9c6ef1b4942445d942b827c2c4a680f8c8d572553f764f16955832979a867a4cb8e37",
+    "dest": "lib",
+    "dest-filename": "pango-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/graphene/0.7.1/graphene-0.7.1.jar",
+    "sha512": "8f320d4aae52a421e25fe798357c725fe1154838590530a89bb9c13f3628afd485f2c0aa904e23088f1fd4a1f455e7c729725da0555cf876a46ba26f0f94e471",
+    "dest": "lib",
+    "dest-filename": "graphene-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/com/uwyn/rife2/bld/1.7.2/bld-1.7.2.jar",
+    "sha512": "e019cce7103adceacbab85cbf87ae4402f4a1c3ff98094a811aae339c93b071d616671b44bffef13a1b4d48c7b0e097aa9b8be1d46095ed4dabbd281e7900a09",
+    "dest": "lib",
+    "dest-filename": "bld-1.7.2.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gdk/0.7.1/gdk-0.7.1.jar",
+    "sha512": "04f0c5c87f91c63d1a221abb48e6eb2e9083c5d1eeb2028c5f4cc325924c1d07029391633b95a90083500a7a74221022a46c4561999697e0e2c22e9d73dc5828",
+    "dest": "lib",
+    "dest-filename": "gdk-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/soup/0.7.1/soup-0.7.1.jar",
+    "sha512": "0066c96816f65f60052e9e446083a99d6b7dc89f35af19fc0b011114e87d99859d789a95d6dc9491a32e5f11d1c3953736d810ab1b074f1440076c1d4ca4629a",
+    "dest": "lib",
+    "dest-filename": "soup-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/javascriptcore/0.7.1/javascriptcore-0.7.1.jar",
+    "sha512": "683af4b024ece9618b524a16f48d38c11b9e220551bafe6d0223acae0c9c42e1d1c5141fb7250aadece8a69230e2b079fc33a8feaa68f9f737c211385dec62aa",
+    "dest": "lib",
+    "dest-filename": "javascriptcore-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gsk/0.7.1/gsk-0.7.1.jar",
+    "sha512": "e3979d3c63385c0ea2c9c1c1a58ca8e7850f8fab216be778ea77fb16beb8312bc324f47cbecd67b539bc943139c8f3b86b1e6b70dff1d617c56a83d2d757a926",
+    "dest": "lib",
+    "dest-filename": "gsk-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gmodule/0.7.1/gmodule-0.7.1.jar",
+    "sha512": "dc31192896bb4b1e43878214d78161e90d7e2f798efd5a5b1058669f51053a7f1c545b059a8c6e2a6546fe7ce1f5325a8c2b9346adb16950563143d358e6f095",
+    "dest": "lib",
+    "dest-filename": "gmodule-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/gio/0.7.1/gio-0.7.1.jar",
+    "sha512": "bb6f914209913cedca61fc0d3697587c94a51a8da102ab9f68b89f0aa1d9d76a9cecd78c2a07ca38715b98030ebc4c86414e63b383a4911690e6d3b0fddb1f26",
+    "dest": "lib",
+    "dest-filename": "gio-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/adw/0.7.1/adw-0.7.1.jar",
+    "sha512": "356a1c8f8ae89d7212bdfccd9afcd607ae86301485dd850d11eb378cbfe6f05f00cee27be368f907b0b941a065564f7ca3fb7ee18b21f4aaf8bec4d4176ba65a",
+    "dest": "lib",
+    "dest-filename": "adw-0.7.1.jar"
+  },
+  {
+    "type": "file",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jwharm/javagi/harfbuzz/0.7.1/harfbuzz-0.7.1.jar",
+    "sha512": "2db6ce77af1a0f6b83d7be2ba6aa354677c1b49191e6cd9e3c6cdcda22a0688bc181201ab00db03524b15f118b75f4c349591083ae1d8101e335634d377ae1d8",
+    "dest": "lib",
+    "dest-filename": "harfbuzz-0.7.1.jar"
+  }
+]

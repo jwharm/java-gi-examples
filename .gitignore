@@ -33,3 +33,6 @@ build/
 
 # Recording from the screen recorder example
 ScreenRecorder/recording.ogg
+
+# Flatpak build files
+*/.flatpak-builder

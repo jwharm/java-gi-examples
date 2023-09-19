@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+//    id 'io.github.jwharm.sourceslistplugin' version '0.1'
 }
 
 repositories {
@@ -7,8 +8,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.7.1'
-    implementation 'io.github.jwharm.javagi:webkit:0.7.1'
+    testImplementation 'io.github.jwharm.javagi:adw:0.7.1'
+    testImplementation 'io.github.jwharm.javagi:webkit:0.7.1'
+    implementation fileTree(dir: 'lib', include: '*.jar')
 }
 
 java {
@@ -21,13 +23,23 @@ tasks.named('compileJava') {
     options.compilerArgs += "--enable-preview"
 }
 
-tasks.named('run') {
-    jvmArgs += '--enable-preview'
-    jvmArgs += '--enable-native-access=ALL-UNNAMED'
-    jvmArgs += '-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu'
+tasks.named('installDist') {
+    destinationDir = file('/app/browser')
+}
+
+tasks.named('startScripts') {
+    defaultJvmOpts = [
+            '--enable-preview',
+            '--enable-native-access=ALL-UNNAMED',
+            '-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu'
+    ]
 }
 
 application {
     mainClass = "io.github.jwharm.javagi.examples.browser.Browser"
 }
 
+//tasks.sourcesList {
+//    outputFile = file('flatpak-sources.json')
+//    downloadDirectory = 'lib'
+//}

@@ -1,0 +1,44 @@
+{
+    "app-id" : "io.github.jwharm.javagi.examples.Browser",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "44",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.openjdk"
+    ],
+    "build-options" : {
+        "append-path": "/usr/lib/sdk/openjdk/gradle/bin:/app/jre/bin"
+    },
+    "command" : "/app/browser/bin/io.github.jwharm.javagi.examples.Browser",
+    "finish-args" : [
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--share=ipc",
+        "--share=network",
+        "--filesystem=home",
+        "--env=PATH=/app/jre/bin:/usr/bin"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "openjdk",
+            "buildsystem" : "simple",
+            "build-commands" : [ "/usr/lib/sdk/openjdk/install.sh" ]
+        },
+        {
+            "name" : "io.github.jwharm.javagi.examples.Browser",
+            "buildsystem" : "simple",
+            "build-commands" : [ "gradle installDist" ],
+            "sources" : [
+                { "type" : "dir", "path" : "." },
+                "flatpak-sources.json"
+            ]
+        }
+    ]
+}
+
