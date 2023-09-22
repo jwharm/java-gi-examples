@@ -1,16 +1,16 @@
 plugins {
     id 'application'
-//    id 'io.github.jwharm.sourceslistplugin' version '0.1'
+    id 'io.github.jwharm.sourceslistplugin' version '0.1'
 }
 
 repositories {
     mavenCentral()
+    maven { url './maven-local' }
 }
 
 dependencies {
-    testImplementation 'io.github.jwharm.javagi:adw:0.7.1'
-    testImplementation 'io.github.jwharm.javagi:webkit:0.7.1'
-    implementation fileTree(dir: 'lib', include: '*.jar')
+    implementation 'io.github.jwharm.javagi:adw:0.7.1'
+    implementation 'io.github.jwharm.javagi:webkit:0.7.1'
 }
 
 java {
@@ -39,7 +39,6 @@ application {
     mainClass = "io.github.jwharm.javagi.examples.browser.Browser"
 }
 
-//tasks.sourcesList {
-//    outputFile = file('flatpak-sources.json')
-//    downloadDirectory = 'lib'
-//}
+tasks.sourcesList {
+    outputFile = file('flatpak-sources.json')
+}
