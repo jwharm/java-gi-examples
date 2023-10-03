@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:gtk:0.7.1'
+    implementation 'io.github.jwharm.javagi:gtk:0.7.2'
 }
 
 java {
