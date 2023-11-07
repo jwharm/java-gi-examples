@@ -164,7 +164,7 @@ public class Calculator extends Application {
         // number into the accumulator.
         if (clean) {
             accumulator = getDisplayValue();
-            display.setText(" ");
+            display.setText("");
             clean = false;
         }
         if (input == '.') {
@@ -206,7 +206,7 @@ public class Calculator extends Application {
     
     // Clear the display and the action status
     private void clear() {
-        display.setText(" ");
+        display.setText("");
         accumulator = 0;
         clean = false;
         function = null;
