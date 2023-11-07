@@ -4,4 +4,4 @@ This example displays a long, scrollable list with randomly generated words. It 
 
 To run the example, clone the repository, navigate to the `ListViewer` folder, and execute `gradle run`.
 
-| ![ListViewer screenshot](listviewer.png)
+![ListViewer screenshot](listviewer.png)
