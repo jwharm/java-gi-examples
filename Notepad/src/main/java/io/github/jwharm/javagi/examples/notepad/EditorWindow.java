@@ -216,15 +216,15 @@ public class EditorWindow extends ApplicationWindow {
      */
     private void write() {
         // Get the contents of the textview buffer as a byte array
-    	TextIter start = TextIter.allocate();
-    	TextIter end = TextIter.allocate();
-    	textview.getBuffer().getBounds(start, end);
-    	byte[] contents = textview.getBuffer().getText(start, end, false).getBytes();
+        TextIter start = TextIter.allocate();
+        TextIter end = TextIter.allocate();
+        textview.getBuffer().getBounds(start, end);
+        byte[] contents = textview.getBuffer().getText(start, end, false).getBytes();
 
         // Write the byte array to the file
     	try {
-			file.replaceContents(contents, "", false, FileCreateFlags.NONE, null, null);
-		} catch (GErrorException e) {
+            file.replaceContents(contents, "", false, FileCreateFlags.NONE, null, null);
+        } catch (GErrorException e) {
             AlertDialog.builder()
                     .modal(true)
                     .message("Error writing to file")
