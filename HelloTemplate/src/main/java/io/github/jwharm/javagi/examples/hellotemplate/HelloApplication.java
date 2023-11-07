@@ -57,7 +57,7 @@ public class HelloApplication extends Application {
 
     /**
      * This method is called during construction of the new GObject instance.
-     * The name "construct" can be freely chosen; the {@code @InstanceInit} annotation
+     * The name "init" can be freely chosen; the {@code @InstanceInit} annotation
      * marks it as an instance init function.
      */
     @InstanceInit
@@ -77,7 +77,7 @@ public class HelloApplication extends Application {
         var quit = new SimpleAction("quit", null);
         quit.onActivate($ -> quit());
         addAction(quit);
-        this.setAccelsForAction("app.quit", new String[]{"<primary>q"});
+        setAccelsForAction("app.quit", new String[]{"<primary>q"});
     }
 
     /**

@@ -12,7 +12,7 @@ public class Main {
     /**
      * Run the HelloTemplate example
      * @param args passed to AdwApplication.run()
-     * @throws GErrorException thrown while loading an registering the compiled resource bundle
+     * @throws GErrorException thrown while loading and registering the compiled resource bundle
      */
     public static void main(String[] args) throws GErrorException {
         var resource = Resource.load("src/main/resources/helloworld.gresource");
