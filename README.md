@@ -38,10 +38,6 @@ This example creates a very basic [web browser](https://github.com/jwharm/java-g
 
 This example is a [small WebkitGtk application](https://github.com/jwharm/java-gi-examples/tree/main/Javascript) that runs a Java callback function from a Javascript function in the webpage.
 
-### Mediastream
-
-The [Mediastream example](https://github.com/jwharm/java-gi-examples/tree/main/MediaStream) is ported from GtkDemo. It paints a simple image using Cairo, and then rotates the image in a GtkVideo widget. The Cairo draw commands use the [Cairo Java bindings](https://github.com/jwharm/cairo-java-bindings).
-
 ### GStreamer sound player
 
 This example [demonstrates how to use GStreamer](https://github.com/jwharm/java-gi-examples/tree/main/PlaySound) and is ported from the GStreamer tutorials. It creates a GStreamer pipeline that will play sound from an Ogg Vorbis file.
