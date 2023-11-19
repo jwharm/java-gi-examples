@@ -28,10 +28,11 @@ public class Notepad extends Application {
 
     // Constructor
     public static Notepad create() {
-        Notepad app = GObject.newInstance(getType());
-        app.setApplicationId("io.github.jwharm.javagi.examples.Notepad");
-        app.setFlags(ApplicationFlags.DEFAULT_FLAGS);
-        return app;
+        return GObject.newInstance(
+                getType(),
+                "application-id", "io.github.jwharm.javagi.examples.Notepad",
+                "flags", ApplicationFlags.DEFAULT_FLAGS,
+                null);
     }
 
     // Memory-address constructor, should always be present
@@ -47,8 +48,8 @@ public class Notepad extends Application {
         var win = this.getActiveWindow();
         if (win == null) {
             win = EditorWindow.create(this);
+            win.setDefaultSize(600, 400);
         }
-        win.setDefaultSize(600, 400);
         win.present();
     }
 }

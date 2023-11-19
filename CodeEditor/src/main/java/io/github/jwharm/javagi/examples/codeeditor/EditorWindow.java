@@ -12,6 +12,7 @@ import org.gnome.gtk.*;
 import org.gnome.gtksourceview.LanguageManager;
 import org.gnome.gtksourceview.View;
 
+import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 
 /**
@@ -37,6 +38,11 @@ public class EditorWindow extends ApplicationWindow {
     public static EditorWindow create(Application application) {
         EditorWindow window = GObject.newInstance(getType());
         window.setApplication(application);
+        window.present();
+
+        // Make sure the text field has the keyboard focus.
+        window.sourceview.grabFocus();
+
         return window;
     }
 
@@ -58,10 +64,10 @@ public class EditorWindow extends ApplicationWindow {
 
         // Create the GtkSourceView, with some sensible features enabled.
         sourceview = View.builder()
-                .monospace(true)
-                .showLineNumbers(true)
-                .highlightCurrentLine(true)
-                .autoIndent(true)
+                .setMonospace(true)
+                .setShowLineNumbers(true)
+                .setHighlightCurrentLine(true)
+                .setAutoIndent(true)
                 .build();
 
         // The window title contains a "modified" indicator, that is
@@ -70,21 +76,21 @@ public class EditorWindow extends ApplicationWindow {
 
         // The textView should be scrollable.
         var scrolledWindow = ScrolledWindow.builder()
-                .child(sourceview)
-                .vexpand(true)
+                .setChild(sourceview)
+                .setVexpand(true)
                 .build();
         super.setChild(scrolledWindow);
 
         // Create buttons for 'new', 'open' and 'save' actions.
-        var newButton = Button.newFromIconName("document-new-symbolic");
+        var newButton = Button.fromIconName("document-new-symbolic");
         newButton.onClicked(() -> whenSure(this::clear));
         header.packStart(newButton);
 
-        var openButton = Button.newFromIconName("document-open-symbolic");
+        var openButton = Button.fromIconName("document-open-symbolic");
         openButton.onClicked(() -> whenSure(this::open));
         header.packStart(openButton);
 
-        var saveButton = Button.newFromIconName("document-save-symbolic");
+        var saveButton = Button.fromIconName("document-save-symbolic");
         saveButton.onClicked(this::save);
         header.packStart(saveButton);
 
@@ -96,10 +102,6 @@ public class EditorWindow extends ApplicationWindow {
 
         // Show the results.
         updateWindowTitle();
-        super.present();
-
-        // Make sure the text field has the keyboard focus.
-        sourceview.grabFocus();
     }
 
     /**
@@ -136,12 +138,12 @@ public class EditorWindow extends ApplicationWindow {
         // Setup the confirmation dialog with three buttons:
         // 0 - Cancel, 1 - Discard, 2 - Save
         AlertDialog alert = AlertDialog.builder()
-                .modal(true)
-                .message("Save changes?")
-                .detail("Do you want to save your changes?")
-                .buttons(new String[] {"Cancel", "Discard", "Save"})
-                .cancelButton(0)
-                .defaultButton(2)
+                .setModal(true)
+                .setMessage("Save changes?")
+                .setDetail("Do you want to save your changes?")
+                .setButtons(new String[] {"Cancel", "Discard", "Save"})
+                .setCancelButton(0)
+                .setDefaultButton(2)
                 .build();
 
         // Get dialog result
@@ -161,7 +163,7 @@ public class EditorWindow extends ApplicationWindow {
      */
     public void clear() {
         file = null;
-    	sourceview.getBuffer().setText(" ", 0);
+    	sourceview.getBuffer().setText("", 0);
         detectLanguage();
     	sourceview.getBuffer().setModified(false);
         sourceview.grabFocus();
@@ -191,9 +193,9 @@ public class EditorWindow extends ApplicationWindow {
                 sourceview.grabFocus();
             } catch (GErrorException e) {
                 AlertDialog.builder()
-                        .modal(true)
-                        .message("Error reading from file")
-                        .detail(e.getMessage())
+                        .setModal(true)
+                        .setMessage("Error reading from file")
+                        .setDetail(e.getMessage())
                         .build()
                         .show(this);
             }
@@ -231,20 +233,20 @@ public class EditorWindow extends ApplicationWindow {
      * Helper function that writes editor contents to a file.
      */
     private void write() {
-        // Get the contents of the sourceview buffer as a byte array
-    	TextIter start = TextIter.allocate();
-    	TextIter end = TextIter.allocate();
-    	sourceview.getBuffer().getBounds(start, end);
-    	byte[] contents = sourceview.getBuffer().getText(start, end, false).getBytes();
+        try (Arena arena = Arena.ofConfined()) {
+            // Get the contents of the sourceview buffer as a byte array
+            TextIter start = TextIter.allocate(arena);
+            TextIter end = TextIter.allocate(arena);
+            sourceview.getBuffer().getBounds(start, end);
+            byte[] contents = sourceview.getBuffer().getText(start, end, false).getBytes();
 
-        // Write the byte array to the file
-    	try {
+            // Write the byte array to the file
 			file.replaceContents(contents, "", false, FileCreateFlags.NONE, null, null);
 		} catch (GErrorException e) {
             AlertDialog.builder()
-                    .modal(true)
-                    .message("Error writing to file")
-                    .detail(e.getMessage())
+                    .setModal(true)
+                    .setMessage("Error writing to file")
+                    .setDetail(e.getMessage())
                     .build()
                     .show(this);
         }

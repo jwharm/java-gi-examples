@@ -12,6 +12,7 @@ import org.gnome.gobject.Value;
 import org.gnome.graphene.Rect;
 import org.gnome.gtk.*;
 
+import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 
 /* Peg Solitaire
@@ -46,10 +47,12 @@ public class PegSolitaire {
         // It does the actual drawing of the paintable.
         @Override
         public void snapshot(Snapshot snapshot, double width, double height) {
-            new org.gnome.gtk.Snapshot(snapshot.handle()).appendColor(
-                    RGBA.allocate(0.6F, 0.3F, 0.0F, 1.0F),
-                    Rect.allocate().init(0, 0, (float) width, (float) height)
-            );
+            try (Arena arena = Arena.ofConfined()) {
+                new org.gnome.gtk.Snapshot(snapshot.handle()).appendColor(
+                        RGBA.allocate(arena, 0.6F, 0.3F, 0.0F, 1.0F),
+                        Rect.allocate(arena).init(0, 0, (float) width, (float) height)
+                );
+            }
         }
 
         /* The flags are very useful to let GTK know that this image
@@ -98,7 +101,7 @@ public class PegSolitaire {
         else
             path = GLib.buildFilename(
                     "usr", "share", "sounds", "freedesktop", "stereo", "suspend-error.oga", null);
-        MediaStream stream = MediaFile.newForFilename(path);
+        MediaStream stream = MediaFile.forFilename(path);
         stream.setVolume(1.0);
         stream.play();
     }
@@ -157,7 +160,7 @@ public class PegSolitaire {
         if (! (paintable instanceof SolitairePeg))
             return null;
 
-        return ContentProvider.newTyped(SolitairePeg.gtype, paintable);
+        return ContentProvider.typed(SolitairePeg.gtype, paintable);
     }
 
     /* This notifies us that the drag has begun.
@@ -278,12 +281,12 @@ public class PegSolitaire {
         StyleContext.addProviderForDisplay(Display.getDefault(), provider, 800);
 
         var grid = Grid.builder()
-                .halign(Align.CENTER)
-                .valign(Align.CENTER)
-                .rowSpacing(6)
-                .columnSpacing(6)
-                .rowHomogeneous(true)
-                .columnHomogeneous(true)
+                .setHalign(Align.CENTER)
+                .setValign(Align.CENTER)
+                .setRowSpacing(6)
+                .setColumnSpacing(6)
+                .setRowHomogeneous(true)
+                .setColumnHomogeneous(true)
                 .build();
         window.setChild(grid);
 
@@ -335,13 +338,13 @@ public class PegSolitaire {
     public PegSolitaire(Application application) {
         var header = new HeaderBar();
         var window = ApplicationWindow.builder()
-                .application(application)
-                .title("Peg Solitaire")
-                .titlebar(header)
-                .defaultWidth(400).defaultHeight(400)
+                .setApplication(application)
+                .setTitle("Peg Solitaire")
+                .setTitlebar(header)
+                .setDefaultWidth(400).setDefaultHeight(400)
                 .build();
 
-        var restart = Button.newFromIconName("view-refresh-symbolic");
+        var restart = Button.fromIconName("view-refresh-symbolic");
         restart.onClicked(() -> createBoard(window));
         header.packStart(restart);
 

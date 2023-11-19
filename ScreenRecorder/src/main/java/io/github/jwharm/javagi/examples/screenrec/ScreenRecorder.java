@@ -119,7 +119,7 @@ public class ScreenRecorder {
          * ximagesrc | video/x-raw,framerate=5/1 | converter | tee
          *                                                         \ queue2 | encoder | muxer | file-output
          */
-        source.linkFiltered(conv, Caps.newSimple("video/x-raw", "framerate", Fraction.getType(), 5, 1, null));
+        source.linkFiltered(conv, Caps.simple("video/x-raw", "framerate", Fraction.getType(), 5, 1, null));
         conv.link(tee);
         tee.requestPadSimple("src_%u").link(queue1.getStaticPad("sink"));
         tee.requestPadSimple("src_%u").link(queue2.getStaticPad("sink"));

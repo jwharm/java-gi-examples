@@ -23,12 +23,12 @@ public class HelloWorld {
         window.setDefaultSize(300, 200);
         
         var box = Box.builder()
-            .orientation(Orientation.VERTICAL)
-            .halign(Align.CENTER)
-            .valign(Align.CENTER)
+            .setOrientation(Orientation.VERTICAL)
+            .setHalign(Align.CENTER)
+            .setValign(Align.CENTER)
             .build();
         
-        var button = Button.newWithLabel("Hello world!");
+        var button = Button.withLabel("Hello world!");
         button.onClicked(window::close);
         
         box.append(button);

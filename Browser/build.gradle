@@ -7,13 +7,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.7.2'
-    implementation 'io.github.jwharm.javagi:webkit:0.7.2'
+    implementation 'io.github.jwharm.javagi:adw:0.8.0'
+    implementation 'io.github.jwharm.javagi:webkit:0.8.0'
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(20)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 

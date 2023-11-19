@@ -72,7 +72,7 @@ public class Calculator extends Application {
         headerbar.setHexpand(true);
         grid.attach(headerbar, 0, 0, 4, 1);
         
-        var buttonClear = Button.newWithLabel("AC");
+        var buttonClear = Button.withLabel("AC");
         buttonClear.addCssClass("destructive-action");
         headerbar.packStart(buttonClear);
         buttonClear.onClicked(this::clear);
@@ -117,7 +117,7 @@ public class Calculator extends Application {
     
     // Small helper function to create keypad buttons and attach a signal
     private Button createInputButton(char label) {
-        var button = Button.newWithLabel(String.valueOf(label));
+        var button = Button.withLabel(String.valueOf(label));
         button.setVexpand(true);
         button.onClicked(() -> input(label));
         return button;
@@ -125,7 +125,7 @@ public class Calculator extends Application {
     
     // Small helper function to create function buttons and attach a signal
     private Button createFunctionButton(char label) {
-        var button = Button.newWithLabel(String.valueOf(label));
+        var button = Button.withLabel(String.valueOf(label));
         button.onClicked(() -> setFunction(label));
         return button;
     }

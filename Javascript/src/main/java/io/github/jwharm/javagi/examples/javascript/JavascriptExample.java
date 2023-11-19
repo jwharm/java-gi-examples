@@ -62,8 +62,8 @@ public class JavascriptExample {
 
             // Create webview
             WebView webview = WebView.builder()
-                    .heightRequest(300)
-                    .widthRequest(500)
+                    .setHeightRequest(300)
+                    .setWidthRequest(500)
                     .build();
 
             // Get the usercontent manager and add the javascript
@@ -101,7 +101,7 @@ public class JavascriptExample {
         }
         var result = value.objectGetProperty("theMessage");
         AlertDialog dialog = AlertDialog.builder()
-                .message("Message received: " + result.toString())
+                .setMessage("Message received: " + result.toString())
                 .build();
         dialog.show(window);
     }

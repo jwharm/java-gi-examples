@@ -42,22 +42,22 @@ public class Browser {
 
         // Back button
         var back = Button.builder()
-                .iconName("go-previous-symbolic")
-                .tooltipText("Back")
+                .setIconName("go-previous-symbolic")
+                .setTooltipText("Back")
                 .build();
         back.onClicked(webview::goBack);
 
         // Forward button
         var forward = Button.builder()
-                .iconName("go-next-symbolic")
-                .tooltipText("Forward")
+                .setIconName("go-next-symbolic")
+                .setTooltipText("Forward")
                 .build();
         forward.onClicked(webview::goForward);
 
         // Stop / Reload button.
         var stopOrReload = Button.builder()
-                .iconName("process-stop-symbolic")
-                .tooltipText("Stop")
+                .setIconName("process-stop-symbolic")
+                .setTooltipText("Stop")
                 .build();
         stopOrReload.onClicked(() -> {
             if (loading) webview.stopLoading();
@@ -66,21 +66,21 @@ public class Browser {
 
         // Home button
         var home = Button.builder()
-                .iconName("go-home-symbolic")
-                .tooltipText("Home")
+                .setIconName("go-home-symbolic")
+                .setTooltipText("Home")
                 .build();
         home.onClicked(() -> webview.loadUri(HOME_PAGE));
 
         // URL bar
         var urlBar = Entry.builder()
-                .inputPurpose(InputPurpose.URL)
-                .hexpand(true)
+                .setInputPurpose(InputPurpose.URL)
+                .setHexpand(true)
                 .build();
 
         // Container for the webview
         var viewContainer = Bin.builder()
-                .vexpand(true)
-                .hexpand(true)
+                .setVexpand(true)
+                .setHexpand(true)
                 .build();
         viewContainer.setChild(webview);
 
@@ -141,10 +141,10 @@ public class Browser {
         box.append(viewContainer);
 
         var window = ApplicationWindow.builder()
-                .application(app)
-                .heightRequest(700)
-                .widthRequest(700)
-                .content(box)
+                .setApplication(app)
+                .setHeightRequest(700)
+                .setWidthRequest(700)
+                .setContent(box)
                 .build();
         window.present();
     }
