@@ -8,7 +8,7 @@ A typical ["Hello World" example](https://github.com/jwharm/java-gi-examples/tre
 
 ### Hello World - template based
 
-This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files.
+This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files. It also includes a Flatpak manifest and instructions to install and run the example as a Flatpak application.
 
 ### Calculator
 
@@ -37,6 +37,10 @@ This example creates a very basic [web browser](https://github.com/jwharm/java-g
 ### WebkitGtk Javascript callback
 
 This example is a [small WebkitGtk application](https://github.com/jwharm/java-gi-examples/tree/main/Javascript) that runs a Java callback function from a Javascript function in the webpage.
+
+### Mediastream
+
+The [Mediastream example](https://github.com/jwharm/java-gi-examples/tree/main/MediaStream) is ported from GtkDemo. It paints a simple image using Cairo, and then rotates the image in a GtkVideo widget. The Cairo draw commands use the [Cairo Java bindings](https://github.com/jwharm/cairo-java-bindings).
 
 ### GStreamer sound player
 
