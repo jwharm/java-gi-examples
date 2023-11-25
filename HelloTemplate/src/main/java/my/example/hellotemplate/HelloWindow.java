@@ -1,4 +1,4 @@
-package io.github.jwharm.javagi.examples.hellotemplate;
+package my.example.hellotemplate;
 
 import io.github.jwharm.javagi.gtk.annotations.GtkChild;
 import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
@@ -16,7 +16,7 @@ import java.lang.foreign.MemorySegment;
  * class. The user interface is defined in the ui file, and the application logic is
  * implemented in Java.
  */
-@GtkTemplate(name="HelloWindow", ui="/io/github/jwharm/javagi/examples/window.ui")
+@GtkTemplate(name="HelloWindow", ui="/my/example/window.ui")
 public class HelloWindow extends ApplicationWindow {
 
     /**

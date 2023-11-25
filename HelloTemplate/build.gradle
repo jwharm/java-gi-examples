@@ -1,20 +1,29 @@
 plugins {
     id 'application'
+    id 'io.github.jwharm.flatpak-gradle-generator' version "1.0.0"
 }
 
 repositories {
     mavenCentral()
+    maven { url='build/repository' } // used by flatpak-builder
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.8.0'
+    implementation 'io.github.jwharm.javagi:adw:0.8.1'
 }
 
+// Task to compile gresource files
 tasks.register('compileResources') {
     exec {
         workingDir 'src/main/resources'
         commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
     }
+}
+
+// Task to generate a file with all dependency urls for the offline flatpak build
+tasks.flatpakGradleGenerator {
+    outputFile.set(file("$rootDir/flatpak/maven-dependencies.json"))
+    downloadDirectory.set('build/repository')
 }
 
 java {
@@ -28,13 +37,13 @@ tasks.named('compileJava') {
     options.compilerArgs += "--enable-preview"
 }
 
-tasks.named('run') {
-    jvmArgs += "--enable-preview"
-    jvmArgs += "--enable-native-access=ALL-UNNAMED"
-    jvmArgs += "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
+tasks.named('installDist') {
+    destinationDir = file('/app/HelloTemplate')
 }
 
 application {
-    mainClass = "io.github.jwharm.javagi.examples.hellotemplate.Main"
+    mainClass = "my.example.hellotemplate.Main"
+    applicationDefaultJvmArgs += "--enable-preview"
+    applicationDefaultJvmArgs += "--enable-native-access=ALL-UNNAMED"
+    applicationDefaultJvmArgs += "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
 }
-

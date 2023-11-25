@@ -1,4 +1,4 @@
-package io.github.jwharm.javagi.examples.hellotemplate;
+package my.example.hellotemplate;
 
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.gobject.annotations.RegisteredType;
@@ -50,7 +50,7 @@ public class HelloApplication extends Application {
      */
     public static HelloApplication create() {
         HelloApplication app = GObject.newInstance(gtype);
-        app.setApplicationId("io.github.jwharm.javagi.examples.HelloTemplate");
+        app.setApplicationId("my.example.HelloTemplate");
         app.setFlags(ApplicationFlags.DEFAULT_FLAGS);
         return app;
     }
@@ -101,7 +101,7 @@ public class HelloApplication extends Application {
         var about = AboutWindow.builder()
             .setTransientFor(this.getActiveWindow())
             .setApplicationName("HelloTemplate")
-            .setApplicationIcon("io.github.jwharm.javagi.examples.HelloTemplate")
+            .setApplicationIcon("my.example.HelloTemplate")
             .setDeveloperName("James Random Hacker")
             .setDevelopers(developers)
             .setVersion("0.1.0")
