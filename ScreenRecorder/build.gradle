@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:gst:0.8.0'
-    implementation 'io.github.jwharm.javagi:gstbase:0.8.0'
+    implementation 'io.github.jwharm.javagi:gst:0.9.0'
+    implementation 'io.github.jwharm.javagi:gstbase:0.9.0'
 }
 
 java {

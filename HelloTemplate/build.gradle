@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.8.1'
+    implementation 'io.github.jwharm.javagi:adw:0.9.0'
 }
 
 // Task to compile gresource files
