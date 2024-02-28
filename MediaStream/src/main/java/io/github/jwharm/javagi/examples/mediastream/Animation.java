@@ -13,6 +13,7 @@ import org.gnome.gobject.GObject;
 import org.gnome.graphene.Rect;
 import org.gnome.gtk.*;
 
+import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 import java.util.Objects;
 
@@ -32,31 +33,42 @@ public class Animation {
     private static final int DURATION = 5 * GLib.USEC_PER_SEC;
 
     // This is the function that draws the actual icon.
-    private static void nuclearSnapshot(Snapshot snapshot, RGBA foreground, RGBA background,
-                                double width, double height, double rotation) {
+    private static void nuclearSnapshot(Snapshot snapshot,
+                                        RGBA foreground,
+                                        RGBA background,
+                                        double width,
+                                        double height,
+                                        double rotation) {
 
         final double RADIUS = 0.3;
         float w = (float) width;
         float h = (float) height;
 
-        snapshot.appendColor(background,
-                Rect.allocate().init(0, 0, w, h));
+        try (Arena arena = Arena.ofConfined()) {
+            snapshot.appendColor(background,
+                    Rect.allocate(arena).init(0, 0, w, h));
 
-        float size = Math.min(w, h);
+            float size = Math.min(w, h);
 
-        snapshot.appendCairo(Rect.allocate().init((w - size) / 2.0f, (h - size) / 2.0f, size, size))
-                .setSourceRGBA(foreground.readRed(), foreground.readGreen(), foreground.readBlue(), foreground.readAlpha())
-                .translate(w / 2.0, h / 2.0)
-                .scale(size, size)
-                .rotate(rotation)
+            snapshot.appendCairo(Rect.allocate(arena)
+                            .init((w - size) / 2.0f, (h - size) / 2.0f, size, size))
+                    .setSourceRGBA(
+                            foreground.readRed(),
+                            foreground.readGreen(),
+                            foreground.readBlue(),
+                            foreground.readAlpha())
+                    .translate(w / 2.0, h / 2.0)
+                    .scale(size, size)
+                    .rotate(rotation)
 
-                .arc(0, 0, 0.1, -PI, PI)
-                .fill()
+                    .arc(0, 0, 0.1, -PI, PI)
+                    .fill()
 
-                .setLineWidth(RADIUS)
-                .setDash(new double[] {RADIUS * PI / 3}, 0.0)
-                .arc(0, 0, RADIUS, -PI, PI)
-                .stroke();
+                    .setLineWidth(RADIUS)
+                    .setDash(new double[] {RADIUS * PI / 3}, 0.0)
+                    .arc(0, 0, RADIUS, -PI, PI)
+                    .stroke();
+        }
     }
 
     /**
@@ -80,15 +92,21 @@ public class Animation {
 
         @Override
         public void snapshot(org.gnome.gdk.Snapshot snapshot, double width, double height) {
-            nuclearSnapshot((Snapshot) snapshot, RGBA.allocate(0, 0, 0, 1), // black
-                    RGBA.allocate(0.9f, 0.75f, 0.15f, 1), // yellow
-                    width, height,
-                    rotation);
+            try (Arena arena = Arena.ofConfined()) {
+                nuclearSnapshot(
+                        (Snapshot) snapshot,
+                        RGBA.allocate(arena, 0, 0, 0, 1), // black
+                        RGBA.allocate(arena, 0.9f, 0.75f, 0.15f, 1), // yellow
+                        width,
+                        height,
+                        rotation);
+            }
         }
 
         @Override
         public PaintableFlags getFlags() {
-            // The flags are very useful to let GTK know that this image is never going to change.
+            // The flags are very useful to let GTK know that this image is
+            // never going to change.
             // This allows many optimizations and should therefore always be set.
             return PaintableFlags.CONTENTS.or(PaintableFlags.SIZE);
         }
@@ -104,13 +122,14 @@ public class Animation {
     /**
      * The NuclearMediaStream class from the MediaStream Paintable example
      */
-    public static class NuclearMediaStream extends MediaStream implements Paintable {
+    public static class NuclearMediaStream
+            extends MediaStream implements Paintable {
 
         public NuclearMediaStream(MemorySegment address) {
             super(address);
         }
 
-        private static final Type gtype = Types.register(Animation.NuclearMediaStream.class);
+        private static final Type gtype = Types.register(NuclearMediaStream.class);
         public static Type getType() {
             return gtype;
         }
@@ -137,10 +156,15 @@ public class Animation {
 
         @Override
         public void snapshot(org.gnome.gdk.Snapshot snapshot, double width, double height) {
-            nuclearSnapshot((Snapshot) snapshot, RGBA.allocate(0, 0, 0, 1), // black
-                    RGBA.allocate(0.9f, 0.75f, 0.15f, 1), // yellow
-                    width, height,
-                    2 * PI * progress / DURATION);
+            try (Arena arena = Arena.ofConfined()) {
+                nuclearSnapshot(
+                        (Snapshot) snapshot,
+                        RGBA.allocate(arena, 0, 0, 0, 1), // black
+                        RGBA.allocate(arena, 0.9f, 0.75f, 0.15f, 1), // yellow
+                        width,
+                        height,
+                        2 * PI * progress / DURATION);
+            }
         }
 
         @Override
@@ -158,7 +182,8 @@ public class Animation {
          * and add it to our current progress.
          */
         public boolean step() {
-            long currentTime = Objects.requireNonNull(GLib.mainCurrentSource()).getTime();
+            long currentTime = Objects.requireNonNull(GLib.mainCurrentSource())
+                    .getTime();
             progress += currentTime - this.lastTime;
 
             // Check if we've ended
@@ -202,7 +227,7 @@ public class Animation {
                 return false;
 
             // We add the source only when we start playing.
-            sourceId = GLib.timeoutAdd(10, this::step);
+            sourceId = GLib.timeoutAdd(GLib.PRIORITY_DEFAULT, 10, this::step);
 
             // We also want to initialize our time, so that we can
             // do accurate updates.
@@ -275,7 +300,8 @@ public class Animation {
     }
 
     public static void main(String[] args) {
-        Application app = new Application("io.github.jwharm.javagi.examples.MediaStream", ApplicationFlags.DEFAULT_FLAGS);
+        Application app = new Application("io.github.jwharm.javagi.examples.MediaStream",
+                ApplicationFlags.DEFAULT_FLAGS);
         app.onActivate(() -> {
             ApplicationWindow window = ApplicationWindow.builder()
                     .setApplication(app)
