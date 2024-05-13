@@ -16,6 +16,7 @@ import org.gnome.gtk.*;
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 import java.util.Objects;
+import java.util.Set;
 
 import static java.lang.Math.PI;
 
@@ -44,31 +45,28 @@ public class Animation {
         float w = (float) width;
         float h = (float) height;
 
-        try (Arena arena = Arena.ofConfined()) {
-            snapshot.appendColor(background,
-                    Rect.allocate(arena).init(0, 0, w, h));
+        snapshot.appendColor(background, Rect.alloc().init(0, 0, w, h));
 
-            float size = Math.min(w, h);
+        float size = Math.min(w, h);
 
-            snapshot.appendCairo(Rect.allocate(arena)
-                            .init((w - size) / 2.0f, (h - size) / 2.0f, size, size))
-                    .setSourceRGBA(
-                            foreground.readRed(),
-                            foreground.readGreen(),
-                            foreground.readBlue(),
-                            foreground.readAlpha())
-                    .translate(w / 2.0, h / 2.0)
-                    .scale(size, size)
-                    .rotate(rotation)
+        snapshot.appendCairo(Rect.alloc()
+                        .init((w - size) / 2.0f, (h - size) / 2.0f, size, size))
+                .setSourceRGBA(
+                        foreground.readRed(),
+                        foreground.readGreen(),
+                        foreground.readBlue(),
+                        foreground.readAlpha())
+                .translate(w / 2.0, h / 2.0)
+                .scale(size, size)
+                .rotate(rotation)
 
-                    .arc(0, 0, 0.1, -PI, PI)
-                    .fill()
+                .arc(0, 0, 0.1, -PI, PI)
+                .fill()
 
-                    .setLineWidth(RADIUS)
-                    .setDash(new double[] {RADIUS * PI / 3}, 0.0)
-                    .arc(0, 0, RADIUS, -PI, PI)
-                    .stroke();
-        }
+                .setLineWidth(RADIUS)
+                .setDash(new double[] {RADIUS * PI / 3}, 0.0)
+                .arc(0, 0, RADIUS, -PI, PI)
+                .stroke();
     }
 
     /**
@@ -95,8 +93,8 @@ public class Animation {
             try (Arena arena = Arena.ofConfined()) {
                 nuclearSnapshot(
                         (Snapshot) snapshot,
-                        RGBA.allocate(arena, 0, 0, 0, 1), // black
-                        RGBA.allocate(arena, 0.9f, 0.75f, 0.15f, 1), // yellow
+                        new RGBA(0, 0, 0, 1, arena), // black
+                        new RGBA(0.9f, 0.75f, 0.15f, 1, arena), // yellow
                         width,
                         height,
                         rotation);
@@ -104,11 +102,11 @@ public class Animation {
         }
 
         @Override
-        public PaintableFlags getFlags() {
+        public Set<PaintableFlags> getFlags() {
             // The flags are very useful to let GTK know that this image is
             // never going to change.
             // This allows many optimizations and should therefore always be set.
-            return PaintableFlags.CONTENTS.or(PaintableFlags.SIZE);
+            return Set.of(PaintableFlags.CONTENTS, PaintableFlags.SIZE);
         }
 
         // Add a simple constructor
@@ -159,8 +157,8 @@ public class Animation {
             try (Arena arena = Arena.ofConfined()) {
                 nuclearSnapshot(
                         (Snapshot) snapshot,
-                        RGBA.allocate(arena, 0, 0, 0, 1), // black
-                        RGBA.allocate(arena, 0.9f, 0.75f, 0.15f, 1), // yellow
+                        new RGBA(0, 0, 0, 1, arena), // black
+                        new RGBA(0.9f, 0.75f, 0.15f, 1, arena), // yellow
                         width,
                         height,
                         2 * PI * progress / DURATION);
@@ -173,8 +171,8 @@ public class Animation {
         }
 
         @Override
-        public PaintableFlags getFlags() {
-            return PaintableFlags.SIZE;
+        public Set<PaintableFlags> getFlags() {
+            return Set.of(PaintableFlags.SIZE);
         }
 
         /**

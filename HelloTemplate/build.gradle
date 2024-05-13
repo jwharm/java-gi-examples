@@ -4,12 +4,13 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url='build/repository' } // used by flatpak-builder
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.9.1'
+    implementation 'io.github.jwharm.javagi:adw:0.10.0'
 }
 
 // Task to compile gresource files
@@ -28,13 +29,12 @@ tasks.flatpakGradleGenerator {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
 tasks.named('compileJava') {
     dependsOn compileResources
-    options.compilerArgs += "--enable-preview"
 }
 
 tasks.named('installDist') {
@@ -43,7 +43,6 @@ tasks.named('installDist') {
 
 application {
     mainClass = "my.example.hellotemplate.Main"
-    applicationDefaultJvmArgs += "--enable-preview"
     applicationDefaultJvmArgs += "--enable-native-access=ALL-UNNAMED"
     applicationDefaultJvmArgs += "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
 }

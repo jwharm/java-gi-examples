@@ -3,26 +3,22 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:gst:0.9.1'
-    implementation 'io.github.jwharm.javagi:gstbase:0.9.1'
+    implementation 'io.github.jwharm.javagi:gst:0.10.0'
+    implementation 'io.github.jwharm.javagi:gstbase:0.10.0'
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
-tasks.named('compileJava') {
-    options.compilerArgs += "--enable-preview"
-}
-
 tasks.named('run') {
-    jvmArgs += "--enable-preview"
     jvmArgs += "--enable-native-access=ALL-UNNAMED"
     jvmArgs += "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
 }

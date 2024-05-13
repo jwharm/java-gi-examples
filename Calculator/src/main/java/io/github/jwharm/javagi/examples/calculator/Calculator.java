@@ -9,6 +9,7 @@ import org.gnome.gdk.ModifierType;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gtk.*;
 
+import java.util.Set;
 import java.util.function.DoubleBinaryOperator;
 
 /**
@@ -131,7 +132,7 @@ public class Calculator extends Application {
     }
     
     // Handle key press events
-    public boolean keyPressed(int keyval, int keycode, ModifierType state) {
+    public boolean keyPressed(int keyval, int keycode, Set<ModifierType> state) {
         String key = Gdk.keyvalName(keyval);
         if (key != null)
             switch (key) {

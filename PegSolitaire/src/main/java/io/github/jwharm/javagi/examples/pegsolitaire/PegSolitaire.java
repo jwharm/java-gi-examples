@@ -14,6 +14,7 @@ import org.gnome.gtk.*;
 
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
+import java.util.Set;
 
 /* Peg Solitaire
  * #Keywords: GtkGridView, game, drag-and-drop, dnd
@@ -49,8 +50,8 @@ public class PegSolitaire {
         public void snapshot(Snapshot snapshot, double width, double height) {
             try (Arena arena = Arena.ofConfined()) {
                 new org.gnome.gtk.Snapshot(snapshot.handle()).appendColor(
-                        RGBA.allocate(arena, 0.6F, 0.3F, 0.0F, 1.0F),
-                        Rect.allocate(arena).init(0, 0, (float) width, (float) height)
+                        new RGBA(0.6F, 0.3F, 0.0F, 1.0F, arena),
+                        Rect.alloc().init(0, 0, (float) width, (float) height)
                 );
             }
         }
@@ -61,8 +62,8 @@ public class PegSolitaire {
          * be set.
          */
         @Override
-        public PaintableFlags getFlags() {
-            return PaintableFlags.CONTENTS.or(PaintableFlags.SIZE);
+        public Set<PaintableFlags> getFlags() {
+            return Set.of(PaintableFlags.CONTENTS, PaintableFlags.SIZE);
         }
 
         @Override
@@ -315,7 +316,7 @@ public class PegSolitaire {
                  */
                 var source = new DragSource();
                 source.setActions(DragAction.MOVE);
-                source.onPrepare((x_, y_) -> dragPrepare(image));
+                source.onPrepare((_, _) -> dragPrepare(image));
                 source.onDragBegin(drag -> dragBegin(source, drag, image));
                 source.onDragEnd((drag, deleteData) -> dragEnd(drag, deleteData, image));
                 image.addController(source);
@@ -328,7 +329,7 @@ public class PegSolitaire {
                 var target = new DropTarget(SolitairePeg.gtype, DragAction.MOVE);
                 // Then we connect our signals.
                 target.onAccept(drop -> dropAccept(drop, image));
-                target.onDrop((value, x_, y_) -> dropDrop(value, image));
+                target.onDrop((value, _, _) -> dropDrop(value, image));
                 // Finally, like above, we add it to the widget.
                 image.addController(target);
             }
