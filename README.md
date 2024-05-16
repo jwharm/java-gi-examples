@@ -50,4 +50,7 @@ This example [demonstrates how to use GStreamer](https://github.com/jwharm/java-
 
 A command-line [screen recording](https://github.com/jwharm/java-gi-examples/tree/main/ScreenRecorder) utility that records the screen for 5 seconds into an Ogg/Theora file. It also demonstrates how to add a Tee and an AppSink to the pipeline so you can trigger custom actions on the recorded data.
 
+### Logging adapter
+
+[A small experiment](https://github.com/jwharm/java-gi-examples/tree/main/Logging) to redirect the output of the GLib logging functions to the Java logging framework SLF4J.
 

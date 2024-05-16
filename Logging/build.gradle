@@ -1,0 +1,27 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
+    implementation 'io.github.jwharm.javagi:glib:0.10.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+tasks.named('run') {
+    jvmArgs += "--enable-native-access=ALL-UNNAMED"
+}
+
+application {
+    mainClass = "io.github.jwharm.javagi.examples.logging.Logging"
+}
+
