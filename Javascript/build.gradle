@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.10.0'
-    implementation 'io.github.jwharm.javagi:webkit:0.10.0'
+    implementation 'io.github.jwharm.javagi:adw:0.10.1'
+    implementation 'io.github.jwharm.javagi:webkit:0.10.1'
 }
 
 java {
