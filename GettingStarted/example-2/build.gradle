@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.github.jwharm.javagi:gtk:0.10.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+tasks.named('run') {
+    jvmArgs += "--enable-native-access=ALL-UNNAMED"
+}
+
+application {
+    mainClass = "Example2"
+}
+

@@ -1,0 +1,42 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.github.jwharm.javagi:gtk:0.10.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+// Task to compile gresource files
+tasks.register('compileResources') {
+    exec {
+        workingDir 'src/main/resources'
+        commandLine 'glib-compile-resources', 'exampleapp.gresource.xml'
+    }
+}
+
+tasks.named('classes') {
+    dependsOn compileResources
+}
+
+tasks.named('run') {
+    jvmArgs += "--enable-native-access=ALL-UNNAMED"
+    args = ["ignored (program name)",
+            "src/main/java/ExampleMainClass.java",
+            "src/main/java/ExampleApp.java",
+            "src/main/java/ExampleAppWindow.java"]
+}
+
+application {
+    mainClass = "ExampleMainClass"
+}
+
