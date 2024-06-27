@@ -1,0 +1,27 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.github.jwharm.javagi:gtk:0.10.2-SNAPSHOT'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(22)
+    }
+}
+
+tasks.named('run') {
+    jvmArgs += '--enable-native-access=ALL-UNNAMED'
+    jvmArgs += '-Djava.library.path=C:/dev/mingw64/mingw64/bin'
+}
+
+application {
+    mainClass = 'io.github.jwharm.javagi.examples.columnview.ColumnViewDatagrid'
+}

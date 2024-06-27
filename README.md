@@ -14,6 +14,10 @@ This is a bit more complete ["Hello World" example](https://github.com/jwharm/ja
 
 A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/Calculator) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
 
+### ColumnView Datagrid
+
+An [example GtkColumnView](https://github.com/jwharm/java-gi-examples/tree/main/ColumnViewDatagrid) displaying a long grid of items.
+
 ### List integration
 
 This example [demonstrates](https://github.com/jwharm/java-gi-examples/tree/main/ListViewer) how you can use a Java ArrayList to implement the GListModel interface, which is central to all modern Gtk list widgets.
