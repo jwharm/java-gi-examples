@@ -58,3 +58,7 @@ A command-line [screen recording](https://github.com/jwharm/java-gi-examples/tre
 
 [A small experiment](https://github.com/jwharm/java-gi-examples/tree/main/Logging) to redirect the output of the GLib logging functions to the Java logging framework SLF4J.
 
+### Spacewar
+
+The classic [Spacewar game](https://github.com/jwharm/java-gi-examples/tree/main/Spacewar), ported from the cairo SVG Spacewar demo to Gtk4 and Kotlin, using Java-GI.
+
