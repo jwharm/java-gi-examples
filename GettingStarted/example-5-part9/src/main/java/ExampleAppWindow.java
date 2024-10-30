@@ -4,7 +4,7 @@ import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.gtk.annotations.GtkCallback;
 import io.github.jwharm.javagi.gtk.annotations.GtkChild;
 import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gtk.types.TemplateTypes;
 import org.gnome.gio.*;
 import org.gnome.gio.Settings;
 import org.gnome.glib.Type;
@@ -19,7 +19,7 @@ import java.util.Set;
 @GtkTemplate(ui="/org/gtk/exampleapp/window.ui")
 public class ExampleAppWindow extends ApplicationWindow {
 
-  private static final Type gtype = Types.register(ExampleAppWindow.class);
+  private static final Type gtype = TemplateTypes.register(ExampleAppWindow.class);
 
   @GtkChild public Stack stack;
   @GtkChild public MenuButton gears;

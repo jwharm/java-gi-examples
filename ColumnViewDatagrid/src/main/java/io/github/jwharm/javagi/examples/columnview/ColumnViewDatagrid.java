@@ -15,7 +15,7 @@ import java.lang.foreign.MemorySegment;
 public class ColumnViewDatagrid {
     
     Application app;
-    ListStore store;
+    ListStore<Row> store;
 
     public ColumnViewDatagrid(String[] args) {
         app = new Application("io.github.jwharm.javagi.examples.columnview", ApplicationFlags.DEFAULT_FLAGS);
@@ -29,12 +29,12 @@ public class ColumnViewDatagrid {
          * populated with Row instances. The Row class is defined below. For
          * this example it simply contains two Strings, one for each column.
          */
-        store = new ListStore(Row.getType());
+        store = new ListStore<>(Row.getType());
         for (int i = 0; i < 1000; i++)
             store.append(Row.create("col1 " + i, "col2 " + i));
 
         // Create the ColumnView and put it in a scrollable window
-        var sel = new SingleSelection(store);
+        var sel = new SingleSelection<Row>(store);
         var columnview = createColumnView(sel);
         var scroll = ScrolledWindow.builder()
                 // Disable horizontal scrolling
@@ -53,7 +53,7 @@ public class ColumnViewDatagrid {
         window.present();
     }
 
-    private static ColumnView createColumnView(SingleSelection sel) {
+    private static ColumnView createColumnView(SingleSelection<Row> sel) {
         var columnview = new ColumnView(sel);
 
         // One ListItemFactory for each column

@@ -1,7 +1,7 @@
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.gtk.annotations.GtkChild;
 import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gtk.types.TemplateTypes;
 import org.gnome.gio.Settings;
 import org.gnome.gio.SettingsBindFlags;
 import org.gnome.glib.Type;
@@ -15,7 +15,7 @@ import java.lang.foreign.MemorySegment;
 @GtkTemplate(ui="/org/gtk/exampleapp/prefs.ui")
 public class ExampleAppPrefs extends Dialog {
 
-  private static final Type gtype = Types.register(ExampleAppPrefs.class);
+  private static final Type gtype = TemplateTypes.register(ExampleAppPrefs.class);
 
   public static Type getType() {
     return gtype;

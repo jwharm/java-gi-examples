@@ -42,7 +42,7 @@ public class ListViewer extends Application {
         });
 
         ScrolledWindow scroll = new ScrolledWindow();
-        ListView lv = new ListView(new SingleSelection(listIndexModel), factory);
+        ListView lv = new ListView(new SingleSelection<>(listIndexModel), factory);
         scroll.setChild(lv);
         scroll.setVexpand(true);
         box.append(scroll);

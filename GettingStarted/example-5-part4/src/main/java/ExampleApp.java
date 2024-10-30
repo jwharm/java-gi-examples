@@ -1,4 +1,4 @@
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gio.File;
 import org.gnome.gio.SimpleAction;

@@ -3,14 +3,13 @@ package io.github.jwharm.javagi.examples.notepad;
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.base.GErrorException;
 import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gio.File;
 import org.gnome.gio.FileCreateFlags;
 import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;
 import org.gnome.gtk.*;
 
-import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 
 /**
@@ -122,7 +121,7 @@ public class EditorWindow extends ApplicationWindow {
             return;
         }
 
-        // Setup the confirmation dialog with three buttons:
+        // Set up the confirmation dialog with three buttons:
         // 0 - Cancel, 1 - Discard, 2 - Save
         AlertDialog alert = AlertDialog.builder()
                 .setModal(true)
@@ -134,7 +133,7 @@ public class EditorWindow extends ApplicationWindow {
                 .build();
 
         // Get dialog result
-        alert.choose(this, null, (object, result, data) -> {
+        alert.choose(this, null, (_, result, _) -> {
             try {
                 int button = alert.chooseFinish(result);
                 if (button == 0) return; // cancel
@@ -159,9 +158,9 @@ public class EditorWindow extends ApplicationWindow {
      * "Open" action: Load a file and show the contents in the editor.
      */
     public void open() {
-        // Setup an Open File dialog.
+        // Set up an Open File dialog.
         var dialog = new FileDialog();
-        dialog.open(this, null, (object, result, data) -> {
+        dialog.open(this, null, (_, result, _) -> {
             try {
                 file = dialog.openFinish(result);
             } catch (GErrorException ignored) {} // used clicked cancel
@@ -170,7 +169,7 @@ public class EditorWindow extends ApplicationWindow {
             // Load the contents of the selected file.
             try {
                 // The byte[] parameter is an out-parameter in the C API.
-                // Create an empty Out<byte[]> object, and read its value afterwards.
+                // Create an empty Out<byte[]> object, and read its value afterward.
                 Out<byte[]> contents = new Out<>();
                 file.loadContents(null, contents, null);
                 textview.getBuffer().setText(new String(contents.get()), contents.get().length);
@@ -192,9 +191,9 @@ public class EditorWindow extends ApplicationWindow {
      */
     public void save() {
         if (file == null) {
-            // Setup a Save File dialog.
+            // Set up a Save File dialog.
             var dialog = new FileDialog();
-            dialog.save(this, null, (object, result, data) -> {
+            dialog.save(this, null, (_, result, _) -> {
                 try {
                     file = dialog.saveFinish(result);
                     if (file == null) return;
@@ -217,10 +216,10 @@ public class EditorWindow extends ApplicationWindow {
      * Helper function that writes editor contents to a file.
      */
     private void write() {
-        try (Arena arena = Arena.ofConfined()) {
+        try {
             // Get the contents of the textview buffer as a byte array
-            TextIter start = TextIter.allocate(arena);
-            TextIter end = TextIter.allocate(arena);
+            TextIter start = new TextIter();
+            TextIter end = new TextIter();
             textview.getBuffer().getBounds(start, end);
             byte[] contents = textview.getBuffer().getText(start, end, false).getBytes();
 
