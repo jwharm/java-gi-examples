@@ -1,4 +1,4 @@
-package org.poach3r
+package io.jwharm.javagi.examples
 
 import org.gnome.adw.Application
 import org.gnome.adw.ApplicationWindow
@@ -25,7 +25,7 @@ class App: Application("org.poacher.GtkLayerShellTest", ApplicationFlags.DEFAULT
         val provider = CssProvider()
         provider.loadFromPath("src/main/resources/Calculator.css")
 
-        StyleContext.addProviderForDisplay(
+        Gtk.styleContextAddProviderForDisplay(
             Display.getDefault(),
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION

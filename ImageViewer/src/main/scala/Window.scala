@@ -28,9 +28,6 @@ class Window(app: App) extends ApplicationWindow(app):
     append(pic)
   }
 
-  /** I cannot figure out a way of making this functional.
-   * `dialog.open` is asynchronous and non-blocking
-   * which is preventing me from returning `pic` from it. */
   private def openFileDialogue(): Unit =
     val dialog = FileDialog.builder()
       .setDefaultFilter(FileFilter.builder()
