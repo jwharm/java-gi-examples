@@ -16,7 +16,7 @@ This is a bit more complete ["Hello World" example](https://github.com/jwharm/ja
 
 ### Calculator
 
-A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/CalculatorKotlin) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
+A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/Calculator) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
 
 ### ColumnView Datagrid
 
