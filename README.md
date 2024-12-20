@@ -6,13 +6,17 @@ This repository contains small example applications made with [Java-GI](https://
 
 A typical ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloWorld) that displays a Gtk window with a button. When you click the button, the application quits.
 
+### Hello World Scala
+
+THe same as the above but written in Scala.
+
 ### Hello World - template based
 
 This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files. It also includes a Flatpak manifest and instructions to install and run the example as a Flatpak application.
 
 ### Calculator
 
-A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/Calculator) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
+A [basic calculator](https://github.com/jwharm/java-gi-examples/tree/main/CalculatorKotlin) that uses Gtk and LibAdwaita. There's a header bar, and a grid-based layout for the buttons. The app reacts to key presses as expected.
 
 ### ColumnView Datagrid
 
@@ -25,6 +29,10 @@ This example [demonstrates](https://github.com/jwharm/java-gi-examples/tree/main
 ### Notepad
 
 A very basic Adwaita [plain-text editor](https://github.com/jwharm/java-gi-examples/tree/main/Notepad), that can load and save files using GIO.
+
+### Image Viewer
+
+A basic Adwaita [image viewer](https://github.com/jwharm/java-gi-examples/tree/main/ImageViewer) written in Scala with a clickable button that opens a file dialog.
 
 ### Code editor
 
