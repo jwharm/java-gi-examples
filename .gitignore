@@ -36,6 +36,10 @@ build/
 */.idea
 */gradle*
 
+# SBT build files
+project/
+target/
+
 # Compiled GResource files
 */.gresource
 
