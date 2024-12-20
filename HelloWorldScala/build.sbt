@@ -4,7 +4,9 @@ ThisBuild / scalaVersion := "3.3.4"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "HelloWorldScala"
+    name := "HelloWorldScala",
+    fork := true,
+    javaOptions += "--enable-native-access=ALL-UNNAMED"
   )
 
-libraryDependencies += "io.github.jwharm.javagi" % "gtk" % "0.11.0"
+libraryDependencies += "io.github.jwharm.javagi" % "gtk" % "0.11.1"
