@@ -3,10 +3,8 @@ package io.github.jwharm.javagi.examples.codeeditor;
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.base.GErrorException;
 import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.gtk.types.Types;
 import org.gnome.gio.File;
 import org.gnome.gio.FileCreateFlags;
-import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;
 import org.gnome.gtk.*;
 import org.gnome.gtksourceview.LanguageManager;
@@ -26,16 +24,9 @@ public class EditorWindow extends ApplicationWindow {
     // The sourceview component
     private View sourceview;
 
-    // Register the EditorWindow class
-    private static final Type gtype = Types.register(EditorWindow.class);
-
-    public static Type getType() {
-        return gtype;
-    }
-
     // Constructor for a new EditorWindow
     public static EditorWindow create(Application application) {
-        EditorWindow window = GObject.newInstance(getType());
+        EditorWindow window = GObject.newInstance(EditorWindow.class);
         window.setApplication(application);
         window.present();
 

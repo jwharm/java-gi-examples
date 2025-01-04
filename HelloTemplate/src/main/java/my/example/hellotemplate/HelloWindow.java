@@ -2,9 +2,8 @@ package my.example.hellotemplate;
 
 import io.github.jwharm.javagi.gtk.annotations.GtkChild;
 import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gtk.types.TemplateTypes;
 import org.gnome.adw.ApplicationWindow;
-import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;
 import org.gnome.gtk.Application;
 import org.gnome.gtk.Label;
@@ -19,10 +18,10 @@ import java.lang.foreign.MemorySegment;
 @GtkTemplate(name="HelloWindow", ui="/my/example/window.ui")
 public class HelloWindow extends ApplicationWindow {
 
-    /**
-     * Register the class as a new, derived GType
-     */
-    public static Type gtype = Types.register(HelloWindow.class);
+    // Register the class as a new, derived GType
+    static {
+        TemplateTypes.register(HelloWindow.class);
+    }
 
     /**
      * Default memory-address constructor that all java-gi classes must have
@@ -44,7 +43,7 @@ public class HelloWindow extends ApplicationWindow {
      * @return the new HelloWindow instance
      */
     public static HelloWindow create(Application app) {
-        HelloWindow win = GObject.newInstance(gtype);
+        HelloWindow win = GObject.newInstance(HelloWindow.class);
         win.setApplication(app);
         return win;
     }

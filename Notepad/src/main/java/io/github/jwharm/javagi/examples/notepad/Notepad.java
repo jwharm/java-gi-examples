@@ -1,8 +1,7 @@
 package io.github.jwharm.javagi.examples.notepad;
 
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gio.ApplicationFlags;
-import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;
 import org.gnome.gtk.Application;
 
@@ -15,21 +14,18 @@ import java.lang.foreign.MemorySegment;
 public class Notepad extends Application {
 
     public static void main(String[] args) {
+        // Register the Notepad and EditorWindow classes
+        Types.register(Notepad.class);
+        Types.register(EditorWindow.class);
+
         var app = Notepad.create();
         app.run(args);
-    }
-
-    // Register the Notepad class
-    private static final Type gtype = Types.register(Notepad.class);
-
-    public static Type getType() {
-        return gtype;
     }
 
     // Constructor
     public static Notepad create() {
         return GObject.newInstance(
-                getType(),
+                Notepad.class,
                 "application-id", "io.github.jwharm.javagi.examples.Notepad",
                 "flags", ApplicationFlags.DEFAULT_FLAGS,
                 null);

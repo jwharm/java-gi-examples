@@ -1,14 +1,13 @@
 package io.github.jwharm.javagi.examples.mediastream;
 
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gdk.Paintable;
 import org.gnome.gdk.PaintableFlags;
 import org.gnome.gdk.RGBA;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.glib.GLib;
 import org.gnome.glib.Source;
-import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;
 import org.gnome.graphene.Rect;
 import org.gnome.gtk.*;
@@ -73,14 +72,12 @@ public class Animation {
      * The NuclearIcon class from the Simple Paintable example
      */
     public static class NuclearIcon extends GObject implements Paintable {
+        static {
+            Types.register(NuclearIcon.class);
+        }
 
         public NuclearIcon(MemorySegment address) {
             super(address);
-        }
-
-        private static final Type gtype = Types.register(NuclearIcon.class);
-        public static Type getType() {
-            return gtype;
         }
 
         // We store the rotation value here.
@@ -111,7 +108,7 @@ public class Animation {
 
         // Add a simple constructor
         public static NuclearIcon create(double rotation) {
-            NuclearIcon nuclear = GObject.newInstance(NuclearIcon.getType());
+            NuclearIcon nuclear = GObject.newInstance(NuclearIcon.class);
             nuclear.rotation = rotation;
             return nuclear;
         }
@@ -122,14 +119,12 @@ public class Animation {
      */
     public static class NuclearMediaStream
             extends MediaStream implements Paintable {
+        static {
+            Types.register(NuclearMediaStream.class);
+        }
 
         public NuclearMediaStream(MemorySegment address) {
             super(address);
-        }
-
-        private static final Type gtype = Types.register(NuclearMediaStream.class);
-        public static Type getType() {
-            return gtype;
         }
 
         // This variable stores the progress of our video.
@@ -293,7 +288,7 @@ public class Animation {
 
         // Add the simple constructor
         public static NuclearMediaStream create() {
-            return GObject.newInstance(NuclearMediaStream.getType());
+            return GObject.newInstance(NuclearMediaStream.class);
         }
     }
 

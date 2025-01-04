@@ -343,7 +343,7 @@ class SpacewarPaintable : GObject, Paintable {
     constructor() : super(gtype, null)
 
     companion object {
-        private val gtype: Type = Types.register<SpacewarPaintable, ObjectClass>(SpacewarPaintable::class.java)
+        private val gtype: Type = Types.register(SpacewarPaintable::class.java)
 
         fun create(): SpacewarPaintable {
             return newInstance(gtype)

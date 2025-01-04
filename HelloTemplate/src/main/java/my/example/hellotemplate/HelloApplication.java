@@ -2,8 +2,8 @@ package my.example.hellotemplate;
 
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.gobject.annotations.RegisteredType;
-import io.github.jwharm.javagi.gtk.types.Types;
-import org.gnome.adw.AboutWindow;
+import io.github.jwharm.javagi.gobject.types.Types;
+import org.gnome.adw.AboutDialog;
 import org.gnome.adw.Application;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gio.SimpleAction;
@@ -27,10 +27,10 @@ import java.lang.foreign.MemorySegment;
 @RegisteredType(name="HelloApplication")
 public class HelloApplication extends Application {
 
-    /**
-     * Register the class as a new, derived GType
-     */
-    public static Type gtype = Types.register(HelloApplication.class);
+    // Register the class as a new, derived GType
+    static {
+        Types.register(HelloApplication.class);
+    }
 
     /**
      * Default memory-address constructor that all java-gi classes must have
@@ -49,7 +49,7 @@ public class HelloApplication extends Application {
      * @return a new HelloApplication instance
      */
     public static HelloApplication create() {
-        HelloApplication app = GObject.newInstance(gtype);
+        HelloApplication app = GObject.newInstance(HelloApplication.class);
         app.setApplicationId("my.example.HelloTemplate");
         app.setFlags(ApplicationFlags.DEFAULT_FLAGS);
         return app;
@@ -98,8 +98,7 @@ public class HelloApplication extends Application {
 
     private void onAboutAction(Variant parameter) {
         String[] developers = { "John Doe", "Jane Doe" };
-        var about = AboutWindow.builder()
-            .setTransientFor(this.getActiveWindow())
+        var about = AboutDialog.builder()
             .setApplicationName("HelloTemplate")
             .setApplicationIcon("my.example.HelloTemplate")
             .setDeveloperName("James Random Hacker")
@@ -107,7 +106,7 @@ public class HelloApplication extends Application {
             .setVersion("0.1.0")
             .setCopyright("© 2023 Yoyodyne, Inc")
             .build();
-        about.present();
+        about.present(this.getActiveWindow());
     }
 
     private void onPreferencesAction(Variant parameter) {

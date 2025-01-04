@@ -1,7 +1,7 @@
 package io.github.jwharm.javagi.examples.pegsolitaire;
 
 import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.gtk.types.Types;
+import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gdk.*;
 import org.gnome.gdk.Snapshot;
 import org.gnome.gio.ApplicationFlags;
@@ -279,7 +279,7 @@ public class PegSolitaire {
 
         provider = new CssProvider();
         provider.loadFromData(css, -1);
-        StyleContext.addProviderForDisplay(Display.getDefault(), provider, 800);
+        Gtk.styleContextAddProviderForDisplay(Display.getDefault(), provider, 800);
 
         var grid = Grid.builder()
                 .setHalign(Align.CENTER)
@@ -358,6 +358,6 @@ public class PegSolitaire {
         app.onActivate(() -> new PegSolitaire(app));
         app.run(args);
 
-        StyleContext.removeProviderForDisplay(Display.getDefault(), PegSolitaire.provider);
+        Gtk.styleContextRemoveProviderForDisplay(Display.getDefault(), PegSolitaire.provider);
     }
 }
