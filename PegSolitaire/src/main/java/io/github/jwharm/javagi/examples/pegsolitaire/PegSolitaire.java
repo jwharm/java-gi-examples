@@ -220,10 +220,7 @@ public class PegSolitaire {
             return false;
 
         // If the image already contains a peg, we cannot accept another one
-        if (image.getPaintable() instanceof SolitairePeg)
-            return false;
-
-        return true;
+        return !(image.getPaintable() instanceof SolitairePeg);
     }
 
     private boolean dropDrop(Value value, Image image) {
@@ -278,7 +275,7 @@ public class PegSolitaire {
                 "}";
 
         provider = new CssProvider();
-        provider.loadFromData(css, -1);
+        provider.loadFromString(css);
         Gtk.styleContextAddProviderForDisplay(Display.getDefault(), provider, 800);
 
         var grid = Grid.builder()
