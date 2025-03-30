@@ -43,5 +43,4 @@ tasks.named('installDist') {
 application {
     mainClass = "my.example.hellotemplate.Main"
     applicationDefaultJvmArgs += "--enable-native-access=ALL-UNNAMED"
-    applicationDefaultJvmArgs += "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
 }

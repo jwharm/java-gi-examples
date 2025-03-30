@@ -20,9 +20,6 @@ kotlin {
 }
 
 application {
-    applicationDefaultJvmArgs = listOf(
-        "--enable-native-access=ALL-UNNAMED",
-        "-Djava.library.path=/usr/lib64:/lib64:/lib:/usr/lib:/lib/x86_64-linux-gnu"
-    )
+    applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
     mainClass = "io.github.jwharm.javagi.examples.SpacewarKt"
 }
