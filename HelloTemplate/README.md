@@ -15,6 +15,11 @@ The application can be built and run using `gradle run`.
 
 The example can be installed as a Flatpak application.
 
+First, install the required Flatpak runtimes:
+```shell
+flatpak --user install org.gnome.Platform//45 org.gnome.Sdk//45 org.freedesktop.Sdk.Extension.openjdk//23.08
+```
+
 Run the following shell commands:
 
 ```shell
