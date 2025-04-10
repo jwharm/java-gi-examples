@@ -7,7 +7,7 @@
         "org.freedesktop.Sdk.Extension.openjdk"
     ],
     "build-options" : {
-        "append-path": "/usr/lib/sdk/openjdk/gradle/bin:/app/jre/bin"
+        "append-path": "/usr/lib/sdk/openjdk/gradle/bin:/app/jdk/bin"
     },
     "command" : "/app/HelloTemplate/bin/my.example.HelloTemplate",
     "finish-args" : [
@@ -33,7 +33,7 @@
         {
             "name" : "my.example.HelloTemplate",
             "buildsystem" : "simple",
-            "build-commands" : [ "gradle installDist" ],
+            "build-commands" : [ "/usr/lib/sdk/openjdk/installjdk.sh", "gradle installDist" ],
             "sources" : [
                 { "type" : "dir", "path" : ".." },
                 "maven-dependencies.json"
