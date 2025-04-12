@@ -17,7 +17,7 @@ The example can be installed as a Flatpak application.
 
 First, install the required Flatpak runtimes:
 ```shell
-flatpak --user install org.gnome.Platform//45 org.gnome.Sdk//45 org.freedesktop.Sdk.Extension.openjdk//23.08
+flatpak --user install org.gnome.Platform//47 org.gnome.Sdk//47 org.freedesktop.Sdk.Extension.openjdk//24.08
 ```
 
 Run the following shell commands:
