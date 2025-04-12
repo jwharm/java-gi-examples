@@ -16,13 +16,11 @@
         "--device=dri",
         "--share=ipc",
         "--share=network",
-        "--filesystem=home",
-        "--env=PATH=/app/jre/bin:/usr/bin"
+        "--filesystem=home"
     ],
     "cleanup" : [
-        "/include",
-        "/lib/pkgconfig",
-        "*.a"
+        "/jdk",
+        "/jre"
     ],
     "modules" : [
         {
