@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.11.2'
-    implementation 'io.github.jwharm.javagi:gtksourceview:0.11.2'
+    implementation 'io.github.jwharm.javagi:adw:0.12.0'
+    implementation 'io.github.jwharm.javagi:gtksourceview:0.12.0'
 }
 
 java {
