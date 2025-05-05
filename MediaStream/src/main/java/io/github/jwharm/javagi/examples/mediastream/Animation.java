@@ -1,7 +1,6 @@
 package io.github.jwharm.javagi.examples.mediastream;
 
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gdk.Paintable;
 import org.gnome.gdk.PaintableFlags;
 import org.gnome.gdk.RGBA;
@@ -13,7 +12,6 @@ import org.gnome.graphene.Rect;
 import org.gnome.gtk.*;
 
 import java.lang.foreign.Arena;
-import java.lang.foreign.MemorySegment;
 import java.util.Objects;
 import java.util.Set;
 
@@ -72,14 +70,6 @@ public class Animation {
      * The NuclearIcon class from the Simple Paintable example
      */
     public static class NuclearIcon extends GObject implements Paintable {
-        static {
-            Types.register(NuclearIcon.class);
-        }
-
-        public NuclearIcon(MemorySegment address) {
-            super(address);
-        }
-
         // We store the rotation value here.
         public double rotation;
 
@@ -107,10 +97,8 @@ public class Animation {
         }
 
         // Add a simple constructor
-        public static NuclearIcon create(double rotation) {
-            NuclearIcon nuclear = GObject.newInstance(NuclearIcon.class);
-            nuclear.rotation = rotation;
-            return nuclear;
+        public NuclearIcon(double rotation) {
+            this.rotation = rotation;
         }
     }
 
@@ -119,14 +107,6 @@ public class Animation {
      */
     public static class NuclearMediaStream
             extends MediaStream implements Paintable {
-        static {
-            Types.register(NuclearMediaStream.class);
-        }
-
-        public NuclearMediaStream(MemorySegment address) {
-            super(address);
-        }
-
         // This variable stores the progress of our video.
         public long progress;
 
@@ -162,7 +142,7 @@ public class Animation {
 
         @Override
         public Paintable getCurrentImage() {
-            return NuclearIcon.create(2 * PI * progress / DURATION);
+            return new NuclearIcon(2 * PI * progress / DURATION);
         }
 
         @Override
@@ -175,8 +155,8 @@ public class Animation {
          * and add it to our current progress.
          */
         public boolean step() {
-            long currentTime = Objects.requireNonNull(GLib.mainCurrentSource())
-                    .getTime();
+            long currentTime = Objects.requireNonNull(
+                    GLib.mainCurrentSource()).getTime();
             progress += currentTime - this.lastTime;
 
             // Check if we've ended
@@ -285,11 +265,6 @@ public class Animation {
         public void init() {
             streamPrepared(false, true, true, DURATION);
         }
-
-        // Add the simple constructor
-        public static NuclearMediaStream create() {
-            return GObject.newInstance(NuclearMediaStream.class);
-        }
     }
 
     public static void main(String[] args) {
@@ -302,7 +277,7 @@ public class Animation {
                     .setDefaultWidth(300)
                     .setDefaultHeight(200)
                     .build();
-            var nuclear = NuclearMediaStream.create();
+            var nuclear = new NuclearMediaStream();
             nuclear.setLoop(true);
             var video = Video.forMediaStream(nuclear);
             window.setChild(video);
