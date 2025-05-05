@@ -20,18 +20,18 @@ import org.gnome.gobject.GObjects;
 public class ScreenRecorder {
 
     private final static String FILENAME = "recording.ogg";
-    private final static int    TIMEOUT  = 5 * 1000; // milliseconds
+    private final static int TIMEOUT  = 5 * 1000; // milliseconds
 
     private final MainLoop loop;
 
     private boolean busCall(Bus bus, Message msg) {
 
-        if (msg.readType().equals(MessageType.EOS)) {
+        if (msg.readType().contains(MessageType.EOS)) {
             GLib.print("End of stream\n");
             loop.quit();
         }
 
-        else if (msg.readType().equals(MessageType.ERROR)) {
+        else if (msg.readType().contains(MessageType.ERROR)) {
             Out<GError> error = new Out<>();
             Out<String> debug = new Out<>();
             msg.parseError(error, debug);
