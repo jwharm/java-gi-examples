@@ -69,7 +69,7 @@ public class ListViewer extends Application {
         for (int i = 0, len = rnd.nextInt(500, 1000); i < len; i++) {
             list.add(randomString());
         }
-        listIndexModel = ListIndexModel.newInstance(list.size());
+        listIndexModel = new ListIndexModel(list.size());
 
         onActivate(this::activate);
         run(args);
