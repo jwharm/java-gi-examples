@@ -5,10 +5,7 @@ import io.github.jwharm.javagi.base.GErrorException;
 import io.github.jwharm.javagi.base.Out;
 import org.gnome.gio.File;
 import org.gnome.gio.FileCreateFlags;
-import org.gnome.gobject.GObject;
 import org.gnome.gtk.*;
-
-import java.lang.foreign.MemorySegment;
 
 /**
  * The EditorWindow class contains a headerbar and the textview. The headerbar
@@ -23,20 +20,12 @@ public class EditorWindow extends ApplicationWindow {
     private TextView textview;
 
     // Constructor for a new EditorWindow
-    public static EditorWindow create(Application application) {
-        EditorWindow window = GObject.newInstance(EditorWindow.class);
-        window.setApplication(application);
-        window.present();
+    public EditorWindow(Application application) {
+        setApplication(application);
+        present();
 
         // Make sure the text field has the keyboard focus.
-        window.textview.grabFocus();
-
-        return window;
-    }
-
-    // Memory-address constructor, should always be present
-    public EditorWindow(MemorySegment address) {
-        super(address);
+        textview.grabFocus();
     }
 
     /**
