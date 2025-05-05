@@ -3,6 +3,8 @@ package io.github.jwharm.javagi.examples.codeeditor;
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.base.GErrorException;
 import io.github.jwharm.javagi.base.Out;
+import org.gnome.adw.*;
+import org.gnome.adw.AlertDialog;
 import org.gnome.adw.Application;
 import org.gnome.adw.ApplicationWindow;
 import org.gnome.adw.HeaderBar;
@@ -23,6 +25,9 @@ public class EditorWindow extends ApplicationWindow {
 
     // The sourceview component
     private View sourceview;
+
+    // A banner to show error messages
+    private Banner banner;
 
     // Constructor for a new EditorWindow
     public EditorWindow(Application application) {
@@ -45,6 +50,12 @@ public class EditorWindow extends ApplicationWindow {
         // Create the headerbar
         var header = new HeaderBar();
         box.append(header);
+
+        banner = Banner.builder()
+                .setButtonLabel("Dismiss")
+                .onButtonClicked(() -> banner.setRevealed(false))
+                .build();
+        box.append(banner);
 
         // Create the GtkSourceView, with some sensible features enabled.
         sourceview = View.builder()
@@ -118,29 +129,24 @@ public class EditorWindow extends ApplicationWindow {
         // No modifications?
         if (! sourceview.getBuffer().getModified()) {
             action.run();
+            sourceview.grabFocus();
             return;
         }
 
-        // Set up the confirmation dialog with three buttons:
-        // 0 - Cancel, 1 - Discard, 2 - Save
-        AlertDialog alert = AlertDialog.builder()
-                .setModal(true)
-                .setMessage("Save changes?")
-                .setDetail("Do you want to save your changes?")
-                .setButtons(new String[] {"Cancel", "Discard", "Save"})
-                .setCancelButton(0)
-                .setDefaultButton(2)
-                .build();
-
-        // Get dialog result
-        alert.choose(this, null, (_, result, _) -> {
-            try {
-                int button = alert.chooseFinish(result);
-                if (button == 0) return; // cancel
-                if (button == 2) save(); // save
+        var dialog = new AlertDialog("Save changes?", "Do you want to save your changes?");
+        dialog.addResponses("cancel", "Cancel", "discard", "Discard", "save", "Save", null);
+        dialog.setResponseAppearance("save", ResponseAppearance.SUGGESTED);
+        dialog.setResponseAppearance("discard", ResponseAppearance.DESTRUCTIVE);
+        dialog.setDefaultResponse("cancel");
+        dialog.setCloseResponse("cancel");
+        dialog.onResponse(null, response -> {
+            if (!response.equals("cancel")) {
+                if (response.equals("save")) save();
                 action.run();
-            } catch (GErrorException ignored) {} // user clicked cancel
+            }
+            sourceview.grabFocus();
         });
+        dialog.present(this);
     }
 
     /**
@@ -179,12 +185,8 @@ public class EditorWindow extends ApplicationWindow {
                 sourceview.getBuffer().setModified(false);
                 sourceview.grabFocus();
             } catch (GErrorException e) {
-                AlertDialog.builder()
-                        .setModal(true)
-                        .setMessage("Error reading from file")
-                        .setDetail(e.getMessage())
-                        .build()
-                        .show(this);
+                banner.setTitle("Error reading from file: " + e.getMessage());
+                banner.setRevealed(true);
             }
         });
     }
@@ -229,12 +231,8 @@ public class EditorWindow extends ApplicationWindow {
             // Write the byte array to the file
             file.replaceContents(contents, "", false, FileCreateFlags.NONE, null, null);
         } catch (GErrorException e) {
-            AlertDialog.builder()
-                    .setModal(true)
-                    .setMessage("Error writing to file")
-                    .setDetail(e.getMessage())
-                    .build()
-                    .show(this);
+            banner.setTitle("Error reading from file: " + e.getMessage());
+            banner.setRevealed(true);
         }
     }
 }
