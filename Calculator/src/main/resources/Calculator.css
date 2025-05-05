@@ -1,4 +1,4 @@
 entry {
-    color: black;
-    background-color: white;
+  color: var(--view-fg-color);
+  background-color: var(--view-bg-color);
 }
