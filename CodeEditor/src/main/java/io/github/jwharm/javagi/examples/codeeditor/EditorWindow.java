@@ -3,14 +3,14 @@ package io.github.jwharm.javagi.examples.codeeditor;
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.base.GErrorException;
 import io.github.jwharm.javagi.base.Out;
+import org.gnome.adw.Application;
+import org.gnome.adw.ApplicationWindow;
+import org.gnome.adw.HeaderBar;
 import org.gnome.gio.File;
 import org.gnome.gio.FileCreateFlags;
-import org.gnome.gobject.GObject;
 import org.gnome.gtk.*;
 import org.gnome.gtksourceview.LanguageManager;
 import org.gnome.gtksourceview.View;
-
-import java.lang.foreign.MemorySegment;
 
 /**
  * The EditorWindow class contains a headerbar and the sourceview. The headerbar
@@ -25,20 +25,13 @@ public class EditorWindow extends ApplicationWindow {
     private View sourceview;
 
     // Constructor for a new EditorWindow
-    public static EditorWindow create(Application application) {
-        EditorWindow window = GObject.newInstance(EditorWindow.class);
-        window.setApplication(application);
-        window.present();
+    public EditorWindow(Application application) {
+        super();
+        setApplication(application);
+        present();
 
         // Make sure the text field has the keyboard focus.
-        window.sourceview.grabFocus();
-
-        return window;
-    }
-
-    // Memory-address constructor, should always be present
-    public EditorWindow(MemorySegment address) {
-        super(address);
+        sourceview.grabFocus();
     }
 
     /**
@@ -47,10 +40,11 @@ public class EditorWindow extends ApplicationWindow {
      */
     @InstanceInit
     public void init() {
+        var box = new Box(Orientation.VERTICAL, 0);
 
         // Create the headerbar
         var header = new HeaderBar();
-        super.setTitlebar(header);
+        box.append(header);
 
         // Create the GtkSourceView, with some sensible features enabled.
         sourceview = View.builder()
@@ -69,7 +63,7 @@ public class EditorWindow extends ApplicationWindow {
                 .setChild(sourceview)
                 .setVexpand(true)
                 .build();
-        super.setChild(scrolledWindow);
+        box.append(scrolledWindow);
 
         // Create buttons for 'new', 'open' and 'save' actions.
         var newButton = Button.fromIconName("document-new-symbolic");
@@ -89,6 +83,8 @@ public class EditorWindow extends ApplicationWindow {
             whenSure(this::destroy);
             return true;
         });
+
+        setContent(box);
 
         // Show the results.
         updateWindowTitle();
