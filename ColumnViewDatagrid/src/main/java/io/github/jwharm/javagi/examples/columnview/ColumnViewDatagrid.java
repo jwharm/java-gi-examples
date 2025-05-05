@@ -7,8 +7,6 @@ import org.gnome.gobject.GObject;
 import org.gnome.gtk.*;
 import org.gnome.gio.ListStore;
 
-import java.lang.foreign.MemorySegment;
-
 /**
  * Example class for constructing a Gtk ColumnView with a lengthy table of data.
  */
@@ -18,7 +16,7 @@ public class ColumnViewDatagrid {
     ListStore<Row> store;
 
     public ColumnViewDatagrid(String[] args) {
-        app = new Application("io.github.jwharm.javagi.examples.columnview", ApplicationFlags.DEFAULT_FLAGS);
+        app = new Application("my.example.ColumnView", ApplicationFlags.DEFAULT_FLAGS);
         app.onActivate(this::onActivate);
         app.run(args);
     }
@@ -29,9 +27,9 @@ public class ColumnViewDatagrid {
          * populated with Row instances. The Row class is defined below. For
          * this example it simply contains two Strings, one for each column.
          */
-        store = new ListStore<>(Row.getType());
+        store = new ListStore<>(Row.gtype);
         for (int i = 0; i < 1000; i++)
-            store.append(Row.create("col1 " + i, "col2 " + i));
+            store.append(new Row("col1 " + i, "col2 " + i));
 
         // Create the ColumnView and put it in a scrollable window
         var sel = new SingleSelection<Row>(store);
@@ -106,19 +104,13 @@ public class ColumnViewDatagrid {
      * plain Java class.
      */
     public static final class Row extends GObject {
-        // Register GType
-        private static final Type gtype = Types.register(ColumnViewDatagrid.Row.class);
-        public static Type getType() { return gtype; }
-        public Row(MemorySegment address) { super(address); }
-
+        public static Type gtype = Types.register(Row.class);
         public String col1;
         public String col2;
         
-        public static Row create(String col1, String col2) {
-            Row row = GObject.newInstance(getType());
-            row.col1 = col1;
-            row.col2 = col2;
-            return row;
+        public Row(String col1, String col2) {
+            this.col1 = col1;
+            this.col2 = col2;
         }
     }
 
