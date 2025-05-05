@@ -1,5 +1,5 @@
 /* SVG Spacewar is copyright (C) 2005 by Nigel Tao: nigel.tao@myrealbox.com
- * This port to Gtk 4 and Kotlin is copyright (C) 2024 Jan-Willem Harmannij
+ * This port to Gtk 4 and Kotlin is copyright (C) 2024-2025 Jan-Willem Harmannij
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  *
@@ -19,12 +19,10 @@
 
 package io.github.jwharm.javagi.examples
 
-import io.github.jwharm.javagi.gobject.types.Types
 import org.freedesktop.cairo.*
 import org.gnome.gdk.*
 import org.gnome.gio.ApplicationFlags
 import org.gnome.glib.GLib
-import org.gnome.glib.Type
 import org.gnome.gobject.GObject
 import org.gnome.graphene.Rect
 import org.gnome.gtk.Application
@@ -32,7 +30,6 @@ import org.gnome.gtk.ApplicationWindow
 import org.gnome.gtk.EventControllerKey
 import org.gnome.gtk.Picture
 import java.lang.foreign.Arena
-import java.lang.foreign.MemorySegment
 import kotlin.math.*
 import kotlin.random.Random
 
@@ -216,7 +213,7 @@ fun main(args: Array<String>) {
         controller.onKeyPressed { keyval, _, _ -> onKeyEvent(keyval, true); true }
         controller.onKeyReleased { keyval, _, _ -> onKeyEvent(keyval, false) }
 
-        val paintable = SpacewarPaintable.create()
+        val paintable = SpacewarPaintable()
         val picture = Picture.builder()
             .setHexpand(true)
             .setVexpand(true)
@@ -251,7 +248,7 @@ fun main(args: Array<String>) {
 /**
  * GdkPaintable implementation for drawing snapshots
  */
-class SpacewarPaintable : GObject, Paintable {
+class SpacewarPaintable : GObject(), Paintable {
 
     override fun snapshot(snapshot: Snapshot, width: Double, height: Double) {
         val startTime = if (showFPS) System.currentTimeMillis() else 0L
@@ -337,17 +334,6 @@ class SpacewarPaintable : GObject, Paintable {
 
     override fun getCurrentImage(): Paintable {
         return this
-    }
-
-    constructor(address: MemorySegment?) : super(address)
-    constructor() : super(gtype, null)
-
-    companion object {
-        private val gtype: Type = Types.register(SpacewarPaintable::class.java)
-
-        fun create(): SpacewarPaintable {
-            return newInstance(gtype)
-        }
     }
 }
 
@@ -576,7 +562,7 @@ fun Context.drawStar(): Context {
     save()
     moveTo(r1 * cosTable[0] / FIXED_POINT_SCALE_FACTOR, r1 * sinTable[0] / FIXED_POINT_SCALE_FACTOR)
 
-    for (i in 0..4) {
+    repeat(4) {
         lineTo(r1 * cosTable[0] / FIXED_POINT_SCALE_FACTOR, r1 * sinTable[0] / FIXED_POINT_SCALE_FACTOR)
         lineTo(r2 * cosTable[a] / FIXED_POINT_SCALE_FACTOR, r2 * sinTable[a] / FIXED_POINT_SCALE_FACTOR)
         rotate(4 * a * PI / NUMBER_OF_ROTATION_ANGLES)
