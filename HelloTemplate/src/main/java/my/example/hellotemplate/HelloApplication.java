@@ -26,7 +26,6 @@ public class HelloApplication extends Application {
      * is created the {@link #init()}  method is automatically run.
      */
     public HelloApplication() {
-        super();
         setApplicationId("my.example.HelloTemplate");
         setFlags(ApplicationFlags.DEFAULT_FLAGS);
     }
@@ -51,7 +50,7 @@ public class HelloApplication extends Application {
         addAction(greet);
 
         var quit = new SimpleAction("quit", null);
-        quit.onActivate($ -> quit());
+        quit.onActivate(_ -> quit());
         addAction(quit);
         setAccelsForAction("app.quit", new String[]{"<primary>q"});
     }

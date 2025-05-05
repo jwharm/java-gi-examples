@@ -11,7 +11,6 @@ public class CodeEditor extends Application {
     }
 
     public CodeEditor () {
-        super();
         setApplicationId("io.github.jwharm.javagi.examples.CodeEditor");
         setFlags(ApplicationFlags.DEFAULT_FLAGS);
     }

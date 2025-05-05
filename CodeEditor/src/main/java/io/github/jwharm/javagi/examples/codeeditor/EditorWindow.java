@@ -31,7 +31,6 @@ public class EditorWindow extends ApplicationWindow {
 
     // Constructor for a new EditorWindow
     public EditorWindow(Application application) {
-        super();
         setApplication(application);
         present();
 

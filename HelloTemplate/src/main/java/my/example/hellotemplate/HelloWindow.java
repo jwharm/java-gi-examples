@@ -24,7 +24,6 @@ public class HelloWindow extends ApplicationWindow {
      * @param app the HelloApplication instance
      */
     public HelloWindow (Application app) {
-        super();
         setApplication(app);
     }
 }
