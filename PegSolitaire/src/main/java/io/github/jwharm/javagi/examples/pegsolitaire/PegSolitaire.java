@@ -36,6 +36,7 @@ public class PegSolitaire {
         public int x;
         public int y;
 
+        // Explicitly register the GType, because it is used later on
         public static Type gtype = Types.register(SolitairePeg.class);
 
         public SolitairePeg(MemorySegment address) {
@@ -86,8 +87,7 @@ public class PegSolitaire {
         }
 
         // And finally, we add a simple constructor.
-        public static SolitairePeg create() {
-            return GObject.newInstance(SolitairePeg.gtype);
+        public SolitairePeg() {
         }
     }
 
@@ -297,7 +297,7 @@ public class PegSolitaire {
                 image.addCssClass("solitaire-field");
                 image.setIconSize(IconSize.LARGE);
                 if (x != 3 || y != 3) {
-                    var peg = SolitairePeg.create();
+                    var peg = new SolitairePeg();
                     peg.setPosition(x, y);
                     image.setFromPaintable(peg);
                 }
