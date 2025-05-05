@@ -2,16 +2,11 @@ package my.example.hellotemplate;
 
 import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
 import io.github.jwharm.javagi.gobject.annotations.RegisteredType;
-import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.adw.AboutDialog;
 import org.gnome.adw.Application;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gio.SimpleAction;
-import org.gnome.glib.Type;
 import org.gnome.glib.Variant;
-import org.gnome.gobject.GObject;
-
-import java.lang.foreign.MemorySegment;
 
 /**
  * HelloApplication is derived from AdwApplication. The class is registered as
@@ -26,33 +21,14 @@ import java.lang.foreign.MemorySegment;
  */
 @RegisteredType(name="HelloApplication")
 public class HelloApplication extends Application {
-
-    // Register the class as a new, derived GType
-    static {
-        Types.register(HelloApplication.class);
-    }
-
     /**
-     * Default memory-address constructor that all java-gi classes must have
-     * @param address the address of a native instance
+     * This is the constructor of the HelloApplication class. When the instance
+     * is created the {@link #init()}  method is automatically run.
      */
-    public HelloApplication(MemorySegment address) {
-        super(address);
-    }
-
-    /**
-     * This is the constructor of the HelloApplication class.
-     * It needs to be a static factory method, because the actual instance
-     * is created by {@link GObject#newInstance(Type)} and calls the {@link #init()}
-     * method before it returns, which would be impossible in a regular constructor with a
-     * {@code super(type)} call.
-     * @return a new HelloApplication instance
-     */
-    public static HelloApplication create() {
-        HelloApplication app = GObject.newInstance(HelloApplication.class);
-        app.setApplicationId("my.example.HelloTemplate");
-        app.setFlags(ApplicationFlags.DEFAULT_FLAGS);
-        return app;
+    public HelloApplication() {
+        super();
+        setApplicationId("my.example.HelloTemplate");
+        setFlags(ApplicationFlags.DEFAULT_FLAGS);
     }
 
     /**
@@ -89,7 +65,7 @@ public class HelloApplication extends Application {
     public void activate() {
         var win = this.getActiveWindow();
         if (win == null) {
-            win = HelloWindow.create(this);
+            win = new HelloWindow(this);
         }
         win.present();
     }
