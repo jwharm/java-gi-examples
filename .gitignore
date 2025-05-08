@@ -33,15 +33,12 @@ replay_pid*
 
 .gradle/
 build/
-*/.idea
-*/gradle*
+**/.idea
+**/gradle*
 
 # SBT build files
 project/
 target/
-
-# Compiled GResource files
-*/.gresource
 
 # Recording from the screen recorder example
 ScreenRecorder/recording.ogg
