@@ -16,21 +16,11 @@ import java.lang.foreign.MemorySegment;
 @GtkTemplate(ui="/org/gtk/exampleapp/window.ui")
 public class ExampleAppWindow extends ApplicationWindow {
 
-  private static final Type gtype = TemplateTypes.register(ExampleAppWindow.class);
-
   @GtkChild
   public Stack stack;
 
-  public static Type getType() {
-    return gtype;
-  }
-
-  public ExampleAppWindow(MemorySegment address) {
-    super(address);
-  }
-
-  public static ExampleAppWindow create(ExampleApp app) {
-    return GObject.newInstance(getType(), "application", app, null);
+  public ExampleAppWindow(ExampleApp app) {
+    setApplication(app);
   }
 
   public void open(File file) {

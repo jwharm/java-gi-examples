@@ -1,29 +1,14 @@
-import io.github.jwharm.javagi.gobject.types.Types;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gio.File;
 import org.gnome.glib.List;
-import org.gnome.glib.Type;
-import org.gnome.gobject.GObject;
 import org.gnome.gtk.Application;
 import org.gnome.gtk.Window;
-import java.lang.foreign.MemorySegment;
 
 public class ExampleApp extends Application {
 
-  // Register this Java class with the GObject type system
-  private static final Type gtype = Types.register(ExampleApp.class);
-
-  public static Type getType() {
-    return gtype;
-  }
-
-  public ExampleApp(MemorySegment address) {
-    super(address);
-  }
-
   @Override
   public void activate() {
-    ExampleAppWindow win = ExampleAppWindow.create(this);
+    ExampleAppWindow win = new ExampleAppWindow(this);
     win.present();
   }
 
@@ -34,7 +19,7 @@ public class ExampleApp extends Application {
     if (!windows.isEmpty())
       win = (ExampleAppWindow) windows.getFirst();
     else
-      win = ExampleAppWindow.create(this);
+      win = new ExampleAppWindow(this);
 
     for (File file : files)
       win.open(file);
@@ -42,10 +27,8 @@ public class ExampleApp extends Application {
     win.present();
   }
 
-  public static ExampleApp create() {
-    return GObject.newInstance(getType(),
-            "application-id", "org.gtk.exampleapp",
-            "flags", ApplicationFlags.HANDLES_OPEN,
-            null);
+  public ExampleApp() {
+    setApplicationId("org.gtk.exampleapp");
+    setFlags(ApplicationFlags.HANDLES_OPEN);
   }
 }

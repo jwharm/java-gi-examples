@@ -12,19 +12,9 @@ import java.lang.foreign.MemorySegment;
 
 public class ExampleApp extends Application {
 
-  private static final Type gtype = Types.register(ExampleApp.class);
-
-  public static Type getType() {
-    return gtype;
-  }
-
-  public ExampleApp(MemorySegment address) {
-    super(address);
-  }
-
   @Override
   public void activate() {
-    ExampleAppWindow win = ExampleAppWindow.create(this);
+    ExampleAppWindow win = new ExampleAppWindow(this);
     win.present();
   }
 
@@ -35,7 +25,7 @@ public class ExampleApp extends Application {
     if (!windows.isEmpty())
       win = (ExampleAppWindow) windows.getFirst();
     else
-      win = ExampleAppWindow.create(this);
+      win = new ExampleAppWindow(this);
 
     for (File file : files)
       win.open(file);
@@ -45,7 +35,7 @@ public class ExampleApp extends Application {
 
   public void preferencesActivated(Variant parameter) {
     ExampleAppWindow win = (ExampleAppWindow) getActiveWindow();
-    ExampleAppPrefs prefs = ExampleAppPrefs.create(win);
+    ExampleAppPrefs prefs = new ExampleAppPrefs(win);
     prefs.present();
   }
 
@@ -69,10 +59,8 @@ public class ExampleApp extends Application {
     setAccelsForAction("app.quit", quitAccels);
   }
 
-  public static ExampleApp create() {
-    return GObject.newInstance(getType(),
-        "application-id", "org.gtk.exampleapp",
-        "flags", ApplicationFlags.HANDLES_OPEN,
-        null);
+  public ExampleApp() {
+    setApplicationId("org.gtk.exampleapp");
+    setFlags(ApplicationFlags.HANDLES_OPEN);
   }
 }
