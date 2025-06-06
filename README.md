@@ -70,3 +70,6 @@ A command-line [screen recording](https://github.com/jwharm/java-gi-examples/tre
 
 The classic [Spacewar game](https://github.com/jwharm/java-gi-examples/tree/main/Spacewar), ported from the cairo SVG Spacewar demo to Gtk4 and Kotlin, using Java-GI.
 
+### OpenGL
+
+An [OpenGL](https://github.com/jwharm/java-gi-examples/tree/main/OpenGL) demo demonstrating how to achive 3D rendering using Gtk.GLArea together with LWJGL.
