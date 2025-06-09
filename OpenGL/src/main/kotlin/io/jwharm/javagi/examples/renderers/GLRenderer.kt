@@ -38,24 +38,28 @@ import org.lwjgl.opengl.GL30.glBindVertexArray
 import org.lwjgl.opengl.GL30.glDeleteVertexArrays
 import org.lwjgl.opengl.GL30.glGenVertexArrays
 
-private val vertexShaderSource = """
-    #version 330 core
-    layout (location = 0) in vec3 aPos;
-    uniform mat4 model;
-    uniform mat4 projection;
-    void main() {
-        gl_Position = projection * model * vec4(aPos.x, aPos.y, aPos.z, 1.0);
-    }
-""".trimIndent()
-private val fragmentShaderSource = """
-    #version 330 core
-    out vec4 FragColor;
-    void main() {
-        FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Rouge
-    }
-""".trimIndent()
-
 class GLRenderer : Renderer {
+
+    companion object {
+
+        private val vertexShaderSource = """
+            #version 330 core
+            layout (location = 0) in vec3 aPos;
+            uniform mat4 model;
+            uniform mat4 projection;
+            void main() {
+                gl_Position = projection * model * vec4(aPos.x, aPos.y, aPos.z, 1.0);
+            }
+        """.trimIndent()
+        private val fragmentShaderSource = """
+            #version 330 core
+            out vec4 FragColor;
+            void main() {
+                FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Rouge
+            }
+        """.trimIndent()
+
+    }
 
     private var vaoId = -1
     private var vboId = -1
