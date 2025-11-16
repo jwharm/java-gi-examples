@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.listviewer;
 
-import io.github.jwharm.javagi.gio.ListIndexModel;
+import org.javagi.gio.ListIndexModel;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.gtk.*;
 
@@ -61,7 +61,7 @@ public class ListViewer extends Application {
     }
 
     public ListViewer(String[] args) {
-        super("io.github.jwharm.javagi.example.ListView", ApplicationFlags.FLAGS_NONE);
+        super("io.github.jwharm.javagi.example.ListView", ApplicationFlags.DEFAULT_FLAGS);
 
         // Build a list with many (between 500 and 1000) random strings.
         // The list is a normal java ArrayList<String>, nothing special.

@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.playsound;
 
-import io.github.jwharm.javagi.base.Out;
+import org.javagi.base.Out;
 import org.freedesktop.gstreamer.gst.*;
 import org.gnome.glib.GError;
 import org.gnome.glib.GLib;

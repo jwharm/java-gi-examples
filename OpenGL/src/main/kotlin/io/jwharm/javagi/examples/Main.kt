@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     App().run(args)
 }
 
-class App: Application("org.gnome.gtk.demo.opengl", ApplicationFlags.DEFAULT_FLAGS) {
+class App: Application("io.github.jwharm.javagi.examples.OpenGL", ApplicationFlags.DEFAULT_FLAGS) {
     init {
         onActivate {
             Window(this).present()

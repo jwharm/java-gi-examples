@@ -9,5 +9,5 @@ lazy val root = (project in file("."))
     javaOptions += "--enable-native-access=ALL-UNNAMED"
   )
 
-libraryDependencies += "io.github.jwharm.javagi" % "gtk" % "0.12.2"
-libraryDependencies += "io.github.jwharm.javagi" % "adw" % "0.12.2"
+libraryDependencies += "org.java-gi" % "gtk" % "0.13.0"
+libraryDependencies += "org.java-gi" % "adw" % "0.13.0"

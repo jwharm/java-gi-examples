@@ -1,7 +1,7 @@
 package io.github.jwharm.javagi.examples.pegsolitaire;
 
-import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.gobject.types.Types;
+import org.javagi.base.Out;
+import org.javagi.gobject.types.Types;
 import org.gnome.gdk.*;
 import org.gnome.gdk.Snapshot;
 import org.gnome.gio.ApplicationFlags;
@@ -351,7 +351,7 @@ public class PegSolitaire {
     }
 
     public static void main(String[] args) {
-        var app = new Application("org.gnome.gtk.demo.PegSolitaire", ApplicationFlags.DEFAULT_FLAGS);
+        var app = new Application("io.github.jwharm.javagi.examples.PegSolitaire", ApplicationFlags.DEFAULT_FLAGS);
         app.onActivate(() -> new PegSolitaire(app));
         app.run(args);
 

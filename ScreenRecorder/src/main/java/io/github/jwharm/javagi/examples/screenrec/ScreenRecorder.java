@@ -1,8 +1,8 @@
 package io.github.jwharm.javagi.examples.screenrec;
 
-import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.gobject.JavaClosure;
-import org.freedesktop.gstreamer.base.BaseSink;
+import org.javagi.base.Out;
+import org.javagi.gobject.JavaClosure;
+import org.freedesktop.gstreamer.app.AppSink;
 import org.freedesktop.gstreamer.gst.*;
 import org.gnome.glib.GError;
 import org.gnome.glib.GLib;
@@ -48,18 +48,7 @@ public class ScreenRecorder {
      * This callback function is triggered when the appsink receives a data sample.
      */
     public void newSample(Element sink) {
-
-        /*
-         * GStreamer plugins aren't registered as introspectable types: In this specific
-         * case, we need the GstApp-1.0.gir - but it isn't in the gir-files repository
-         * currently. As a result, Java doesn't recognize the AppSink type, which is
-         * derived from BaseSink (which is a known type), and as a fallback, it considers
-         * the appsink to be an Element.
-         * Trying to cast the Element to BaseSink will throw a ClassCastException, so
-         * that is not an option. As a workaround, we manually construct a BaseSink from
-         * the memory address of the Element.
-         */
-        var appsink = new BaseSink.BaseSinkImpl(sink.handle());
+        var appsink = (AppSink) sink;
 
         // Get the buffer
         var sample = appsink.getLastSample();
@@ -71,7 +60,6 @@ public class ScreenRecorder {
     }
 
     public ScreenRecorder(String[] args) {
-
         // Initialisation
         Gst.init(new Out<>(args));
 

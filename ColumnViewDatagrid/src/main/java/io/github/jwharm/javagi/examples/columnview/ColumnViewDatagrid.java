@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.columnview;
 
-import io.github.jwharm.javagi.gobject.types.Types;
+import org.javagi.gobject.types.Types;
 import org.gnome.gio.ApplicationFlags;
 import org.gnome.glib.Type;
 import org.gnome.gobject.GObject;

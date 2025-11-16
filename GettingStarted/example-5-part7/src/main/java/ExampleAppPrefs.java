@@ -1,6 +1,6 @@
-import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.gtk.annotations.GtkChild;
-import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
+import org.javagi.gobject.annotations.InstanceInit;
+import org.javagi.gtk.annotations.GtkChild;
+import org.javagi.gtk.annotations.GtkTemplate;
 import org.gnome.gio.Settings;
 import org.gnome.gio.SettingsBindFlags;
 import org.gnome.gtk.ComboBoxText;

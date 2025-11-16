@@ -1,4 +1,4 @@
-import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
+import org.javagi.gtk.annotations.GtkTemplate;
 import org.gnome.gio.File;
 import org.gnome.gtk.ApplicationWindow;
 

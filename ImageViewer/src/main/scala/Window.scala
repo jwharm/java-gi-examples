@@ -1,4 +1,4 @@
-import io.github.jwharm.javagi.base.GErrorException
+import org.javagi.base.GErrorException
 import org.gnome.adw.{ApplicationWindow, HeaderBar}
 import org.gnome.gio.AsyncResult
 import org.gnome.gobject.GObject

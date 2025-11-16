@@ -3,7 +3,7 @@ plugins {
     application
 }
 
-group = "io.jwharm.javagi.examples"
+group = "org.java-gi.examples"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -12,8 +12,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("io.github.jwharm.javagi:gtk:0.11.2")
-    implementation("io.github.jwharm.javagi:adw:0.11.2")
+    implementation("org.java-gi:adw:0.13.0")
     implementation("org.lwjgl:lwjgl:3.3.6")
     runtimeOnly("org.lwjgl:lwjgl:3.3.6:natives-linux")
     implementation("org.lwjgl:lwjgl-opengl:3.3.6")

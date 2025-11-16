@@ -7,7 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:gtk:0.12.2'
+    implementation 'org.java-gi:gtk:0.13.0'
 }
 
 java {
@@ -16,11 +16,9 @@ java {
     }
 }
 
-tasks.register('compileResources') {
-    exec {
-        workingDir 'src/main/resources'
-        commandLine 'glib-compile-resources', 'exampleapp.gresource.xml'
-    }
+tasks.register('compileResources', Exec) {
+    workingDir 'src/main/resources'
+    commandLine 'glib-compile-resources', 'exampleapp.gresource.xml'
 }
 
 tasks.named('classes') {

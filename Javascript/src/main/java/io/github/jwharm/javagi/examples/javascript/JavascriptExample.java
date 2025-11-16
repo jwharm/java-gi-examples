@@ -1,10 +1,9 @@
 package io.github.jwharm.javagi.examples.javascript;
 
-import io.github.jwharm.javagi.base.UnsupportedPlatformException;
 import org.gnome.gtk.*;
 import org.gnome.gio.ApplicationFlags;
-import org.gnome.webkit.*;
-import org.gnome.webkit.jsc.Value;
+import org.webkitgtk.*;
+import org.webkitgtk.jsc.Value;
 
 /**
  * Small example app that demonstrates a callback from a Javascript script running
@@ -55,39 +54,34 @@ public class JavascriptExample {
     }
 
     public void activate() {
-        try {
-            // Create window
-            window = new ApplicationWindow(app);
-            window.setTitle("WebKit Demo");
+        // Create window
+        window = new ApplicationWindow(app);
+        window.setTitle("WebKit Demo");
 
-            // Create webview
-            WebView webview = WebView.builder()
-                    .setHeightRequest(300)
-                    .setWidthRequest(500)
-                    .build();
+        // Create webview
+        WebView webview = WebView.builder()
+                .setHeightRequest(300)
+                .setWidthRequest(500)
+                .build();
 
-            // Get the usercontent manager and add the javascript
-            var manager = webview.getUserContentManager();
-            manager.addScript(new UserScript(
-                    script,
-                    UserContentInjectedFrames.ALL_FRAMES,
-                    UserScriptInjectionTime.END,
-                    null,
-                    null
-            ));
+        // Get the usercontent manager and add the javascript
+        var manager = webview.getUserContentManager();
+        manager.addScript(new UserScript(
+                script,
+                UserContentInjectedFrames.ALL_FRAMES,
+                UserScriptInjectionTime.END,
+                null,
+                null
+        ));
 
-            // Connect the javascript call to a Java callback function
-            manager.onScriptMessageReceived(null, this::displayMessage);
-            manager.registerScriptMessageHandler("handlerId", null);
+        // Connect the javascript call to a Java callback function
+        manager.onScriptMessageReceived(null, this::displayMessage);
+        manager.registerScriptMessageHandler("handlerId", null);
 
-            // Load the webview page and display the results
-            webview.loadHtml(html, null);
-            window.setChild(webview);
-            window.present();
-
-        } catch (UnsupportedPlatformException e) {
-            System.out.println("Not supported on this platform");
-        }
+        // Load the webview page and display the results
+        webview.loadHtml(html, null);
+        window.setChild(webview);
+        window.present();
     }
 
     /*

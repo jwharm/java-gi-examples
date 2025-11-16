@@ -9,7 +9,7 @@ import org.gnome.glib.GLib;
 import org.gnome.glib.Uri;
 import org.gnome.gobject.BindingFlags;
 import org.gnome.gtk.*;
-import org.gnome.webkit.WebView;
+import org.webkitgtk.WebView;
 
 /**
  * This class demonstrates a simple WebKitGtk-based browser application
