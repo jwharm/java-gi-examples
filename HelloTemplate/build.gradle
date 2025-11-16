@@ -9,15 +9,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:adw:0.12.2'
+    implementation 'org.java-gi:adw:0.13.0'
 }
 
 // Task to compile gresource files
-tasks.register('compileResources') {
-    exec {
-        workingDir 'src/main/resources'
-        commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
-    }
+tasks.register('compileResources', Exec) {
+    workingDir 'src/main/resources'
+    commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
 }
 
 // Task to generate a file with all dependency urls for the offline flatpak build

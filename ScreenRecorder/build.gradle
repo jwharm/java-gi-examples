@@ -7,8 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.jwharm.javagi:gst:0.12.2'
-    implementation 'io.github.jwharm.javagi:gstbase:0.12.2'
+    implementation 'org.java-gi:gstreamer:0.13.0'
 }
 
 java {

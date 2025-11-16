@@ -1,8 +1,8 @@
-import io.github.jwharm.javagi.base.GErrorException;
-import io.github.jwharm.javagi.base.Out;
-import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.gtk.annotations.GtkChild;
-import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
+import org.javagi.base.GErrorException;
+import org.javagi.base.Out;
+import org.javagi.gobject.annotations.InstanceInit;
+import org.javagi.gtk.annotations.GtkChild;
+import org.javagi.gtk.annotations.GtkTemplate;
 import org.gnome.gio.File;
 import org.gnome.gio.MenuModel;
 import org.gnome.gtk.*;

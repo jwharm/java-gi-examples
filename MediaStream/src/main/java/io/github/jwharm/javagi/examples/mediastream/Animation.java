@@ -1,6 +1,6 @@
 package io.github.jwharm.javagi.examples.mediastream;
 
-import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
+import org.javagi.gobject.annotations.InstanceInit;
 import org.gnome.gdk.Paintable;
 import org.gnome.gdk.PaintableFlags;
 import org.gnome.gdk.RGBA;
@@ -105,8 +105,7 @@ public class Animation {
     /**
      * The NuclearMediaStream class from the MediaStream Paintable example
      */
-    public static class NuclearMediaStream
-            extends MediaStream implements Paintable {
+    public static class NuclearMediaStream extends MediaStream implements Paintable {
         // This variable stores the progress of our video.
         public long progress;
 

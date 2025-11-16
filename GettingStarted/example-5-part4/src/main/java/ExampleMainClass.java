@@ -1,4 +1,4 @@
-import io.github.jwharm.javagi.base.GErrorException;
+import org.javagi.base.GErrorException;
 import org.gnome.gio.Resource;
 
 public class ExampleMainClass {

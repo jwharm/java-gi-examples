@@ -1,7 +1,7 @@
 package my.example.hellotemplate;
 
-import io.github.jwharm.javagi.gtk.annotations.GtkChild;
-import io.github.jwharm.javagi.gtk.annotations.GtkTemplate;
+import org.javagi.gtk.annotations.GtkChild;
+import org.javagi.gtk.annotations.GtkTemplate;
 import org.gnome.adw.ApplicationWindow;
 import org.gnome.gtk.Application;
 import org.gnome.gtk.Label;

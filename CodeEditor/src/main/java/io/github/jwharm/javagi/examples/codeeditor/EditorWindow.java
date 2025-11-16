@@ -1,8 +1,8 @@
 package io.github.jwharm.javagi.examples.codeeditor;
 
-import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.base.GErrorException;
-import io.github.jwharm.javagi.base.Out;
+import org.javagi.gobject.annotations.InstanceInit;
+import org.javagi.base.GErrorException;
+import org.javagi.base.Out;
 import org.gnome.adw.*;
 import org.gnome.adw.AlertDialog;
 import org.gnome.adw.Application;

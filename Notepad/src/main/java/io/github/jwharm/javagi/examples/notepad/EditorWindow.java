@@ -1,8 +1,8 @@
 package io.github.jwharm.javagi.examples.notepad;
 
-import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.base.GErrorException;
-import io.github.jwharm.javagi.base.Out;
+import org.javagi.gobject.annotations.InstanceInit;
+import org.javagi.base.GErrorException;
+import org.javagi.base.Out;
 import org.gnome.gio.File;
 import org.gnome.gio.FileCreateFlags;
 import org.gnome.gtk.*;

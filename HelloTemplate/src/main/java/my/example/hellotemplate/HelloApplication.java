@@ -1,7 +1,7 @@
 package my.example.hellotemplate;
 
-import io.github.jwharm.javagi.gobject.annotations.InstanceInit;
-import io.github.jwharm.javagi.gobject.annotations.RegisteredType;
+import org.javagi.gobject.annotations.InstanceInit;
+import org.javagi.gobject.annotations.RegisteredType;
 import org.gnome.adw.AboutDialog;
 import org.gnome.adw.Application;
 import org.gnome.gio.ApplicationFlags;
