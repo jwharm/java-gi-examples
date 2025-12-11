@@ -4,12 +4,11 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
     maven { url='build/repository' } // used by flatpak-builder
 }
 
 dependencies {
-    implementation 'org.java-gi:adw:0.13.0'
+    implementation 'org.java-gi:adw:0.13.1'
 }
 
 // Task to compile gresource files

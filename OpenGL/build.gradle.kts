@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.java-gi:adw:0.13.0")
+    implementation("org.java-gi:adw:0.13.1")
     implementation("org.lwjgl:lwjgl:3.3.6")
     runtimeOnly("org.lwjgl:lwjgl:3.3.6:natives-linux")
     implementation("org.lwjgl:lwjgl-opengl:3.3.6")

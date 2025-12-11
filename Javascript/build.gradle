@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.java-gi:adw:0.13.0'
-    implementation 'org.java-gi:webkit:0.13.0'
+    implementation 'org.java-gi:adw:0.13.1'
+    implementation 'org.java-gi:webkit:0.13.1'
 }
 
 java {

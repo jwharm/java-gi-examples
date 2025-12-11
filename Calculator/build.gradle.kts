@@ -12,8 +12,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.java-gi:gtk:0.13.0")
-    implementation("org.java-gi:adw:0.13.0")
+    implementation("org.java-gi:gtk:0.13.1")
+    implementation("org.java-gi:adw:0.13.1")
 }
 
 tasks.named<JavaExec>("run") {

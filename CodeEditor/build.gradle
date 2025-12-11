@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.java-gi:adw:0.13.0'
-    implementation 'org.java-gi:gtksourceview:0.13.0'
+    implementation 'org.java-gi:adw:0.13.1'
+    implementation 'org.java-gi:gtksourceview:0.13.1'
 }
 
 java {
