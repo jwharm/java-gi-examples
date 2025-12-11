@@ -40,5 +40,8 @@ build/
 project/
 target/
 
+# Kotlin
+.kotlin/
+
 # Recording from the screen recorder example
 ScreenRecorder/recording.ogg
