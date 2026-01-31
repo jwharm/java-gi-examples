@@ -12,7 +12,7 @@ interface Renderer {
 
     fun onInit()
     fun onResize(width: Int, height: Int)
-    fun onRender(context: GLContext): Boolean
+    fun onRender(context: GLContext?): Boolean
     fun onDestroy()
 
 }

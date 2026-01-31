@@ -117,7 +117,7 @@ class GLRenderer : Renderer {
         glUniformMatrix4fv(projectionMatrixUniformLocation, false, projectionMatrix.get(FloatArray(16)))
     }
 
-    override fun onRender(context: GLContext): Boolean {
+    override fun onRender(context: GLContext?): Boolean {
         glClear(GL_COLOR_BUFFER_BIT)
 
         // draw triangle

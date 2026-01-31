@@ -3,11 +3,12 @@ plugins {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.java-gi:gtk:0.13.1'
+    implementation 'org.java-gi:gtk:0.14.0'
 }
 
 java {
