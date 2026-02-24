@@ -12,7 +12,7 @@ THe same as the above but written in Scala.
 
 ### Hello World - template based
 
-This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files. It also includes a Flatpak manifest and instructions to install and run the example as a Flatpak application.
+This is a bit more complete ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloTemplate) that is based on the default application that GNOME Builder generates for new Vala projects. It uses Gtk composite template classes to define the user interface in XML files.
 
 ### Calculator
 
