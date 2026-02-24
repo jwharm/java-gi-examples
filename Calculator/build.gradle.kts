@@ -12,8 +12,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.java-gi:gtk:0.14.0")
-    implementation("org.java-gi:adw:0.14.0")
+    implementation("org.java-gi:gtk:0.14.1")
+    implementation("org.java-gi:adw:0.14.1")
 }
 
 tasks.named<JavaExec>("run") {
@@ -22,8 +22,4 @@ tasks.named<JavaExec>("run") {
 
 application {
     mainClass.set("io.jwharm.javagi.examples.MainKt")
-}
-
-kotlin {
-    jvmToolchain(22)
 }

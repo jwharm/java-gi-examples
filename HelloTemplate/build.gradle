@@ -1,14 +1,13 @@
 plugins {
     id 'application'
-    id 'io.github.jwharm.flatpak-gradle-generator' version "1.5.0"
 }
 
 repositories {
-    maven { url='build/repository' } // used by flatpak-builder
+    mavenCentral()
 }
 
 dependencies {
-    implementation 'org.java-gi:adw:0.14.0'
+    implementation 'org.java-gi:adw:0.14.1'
 }
 
 // Task to compile gresource files
@@ -17,24 +16,8 @@ tasks.register('compileResources', Exec) {
     commandLine 'glib-compile-resources', 'helloworld.gresource.xml'
 }
 
-// Task to generate a file with all dependency urls for the offline flatpak build
-tasks.flatpakGradleGenerator {
-    outputFile.set(file("$rootDir/flatpak/maven-dependencies.json"))
-    downloadDirectory.set('build/repository')
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
-    }
-}
-
 tasks.named('compileJava') {
     dependsOn compileResources
-}
-
-tasks.named('installDist') {
-    destinationDir = file('/app/HelloTemplate')
 }
 
 application {

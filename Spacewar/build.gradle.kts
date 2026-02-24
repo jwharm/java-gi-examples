@@ -12,11 +12,7 @@ repositories {
 
 dependencies {
     implementation("io.github.jwharm.cairobindings:cairo:1.18.4.1")
-    implementation("org.java-gi:gtk:0.14.0")
-}
-
-kotlin {
-    jvmToolchain(22)
+    implementation("org.java-gi:gtk:0.14.1")
 }
 
 application {

@@ -7,13 +7,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.java-gi:gtk:0.14.0'
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(22)
-    }
+    implementation 'org.java-gi:gtk:0.14.1'
 }
 
 tasks.register('compileResources', Exec) {

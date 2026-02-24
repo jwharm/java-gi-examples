@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.java-gi:adw:0.14.0")
+    implementation("org.java-gi:adw:0.14.1")
     implementation("org.lwjgl:lwjgl:3.3.6")
     runtimeOnly("org.lwjgl:lwjgl:3.3.6:natives-linux")
     implementation("org.lwjgl:lwjgl-opengl:3.3.6")
@@ -32,8 +32,4 @@ tasks.named<JavaExec>("run") {
 
 application {
     mainClass.set("io.jwharm.javagi.examples.MainKt")
-}
-
-kotlin {
-    jvmToolchain(22)
 }

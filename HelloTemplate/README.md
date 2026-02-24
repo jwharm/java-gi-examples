@@ -11,30 +11,4 @@ are installed.
 
 The application can be built and run using `gradle run`.
 
-### Flatpak installation
-
-The example can be installed as a Flatpak application.
-
-First, install the required Flatpak runtimes:
-```shell
-flatpak --user install org.gnome.Platform//47 org.gnome.Sdk//47 org.freedesktop.Sdk.Extension.openjdk//24.08
-```
-
-Run the following shell commands:
-
-```shell
-gradle flatpakGradleGenerator
-flatpak-builder --user --install build/flatpak flatpak/my.example.HelloTemplate.json
-```
-
-The first command scans the Gradle build for online dependencies, and generates 
-a JSON file with all dependency URLs. The second command runs `flatpak-builder`. 
-The Flatpak build script can be found in the `flatpak/` folder. It includes the 
-generated JSON file (so the dependencies will be downloaded) and then runs 
-`gradle installDist`. When done, you can run the application:
-
-```shell
-flatpak run my.example.HelloTemplate
-```
-
 ![Hello World (template based) screenshot](template-helloworld.png)
