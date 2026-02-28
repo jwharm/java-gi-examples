@@ -1,12 +1,16 @@
 # Examples for Java-GI
 
-This repository contains small example applications made with [Java-GI](https://github.com/jwharm/java-gi). Each example can be separately built and run with `gradle run`:
+This repository contains small example applications made with [Java-GI](https://github.com/jwharm/java-gi). Each example can be separately built and run:
 
 ### Hello World
 
 A typical ["Hello World" example](https://github.com/jwharm/java-gi-examples/tree/main/HelloWorld) that displays a Gtk window with a button. When you click the button, the application quits.
 
-### Hello World Scala
+### Hello World - Clojure
+
+The same as the above but written in Clojure.
+
+### Hello World - Scala
 
 THe same as the above but written in Scala.
 

@@ -40,6 +40,9 @@ build/
 project/
 target/
 
+# Clojure
+**/.cpcache/
+
 # Kotlin
 .kotlin/
 
