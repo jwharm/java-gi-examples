@@ -1,6 +1,5 @@
 {:deps {
-  org.java-gi/gtk {:mvn/version "0.14.1"}
- }
+  org.java-gi/gtk {:mvn/version "0.14.1"}}
 
  :aliases {
    :hello {

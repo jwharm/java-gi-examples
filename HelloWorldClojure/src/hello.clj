@@ -15,8 +15,7 @@
                                              (.setValign Align/CENTER)
                                              (.append (doto (Button/withLabel "Hello world!")
                                                         (.onClicked (reify Button$ClickedCallback
-                                                        (run [this]
-                                                          (.close app-window))))))))
+                                                                      (run [this] (.close app-window))))))))
                                 (.present))))))))
 
 (defn run [opts]
