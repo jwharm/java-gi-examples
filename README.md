@@ -1,6 +1,6 @@
 # Examples for Java-GI
 
-This repository contains small example applications made with [Java-GI](https://github.com/jwharm/java-gi). Each example can be separately built and run:
+This repository contains small example applications made with [Java-GI](https://java-gi.org), the Java bindings for GTK and many other GObject-Introspection-based libraries. Each example can be separately built and run:
 
 ### Hello World
 
